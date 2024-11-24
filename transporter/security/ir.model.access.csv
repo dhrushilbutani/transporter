@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_transport_category,transport_category,model_transport_category,,1,1,1,1
+
+access_transport_subcategory,transport_subcategory,model_transport_subcategory,,1,1,1,1
+
+access_transport_vehicle,transport_vehicle,model_transport_vehicle,,1,1,1,1

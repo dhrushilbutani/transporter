@@ -1,0 +1,94 @@
+<odoo>
+    <template id="transporter.view_vechile">
+        <t t-name="View Vechile">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="js_blog website_blog">
+                        <div id="o_wblog_blog_top">
+                            <div data-name="Cover" data-use_filters="True" data-use_text_align="True"
+                                 data-res-model="blog.blog" data-res-id="3"
+                                 class="o_record_cover_container d-flex flex-column h-100 o_colored_level o_cc o_cc3   o_wblog_post_page_cover o_record_has_cover cover_auto">
+                                <div class="o_record_cover_component o_record_cover_image "
+                                     style="background-image: none;"></div>
+                                <div class="o_record_cover_component o_record_cover_filter oe_black"
+                                     style="opacity: 0.2;"></div>
+                                <div class="container position-relative h-100 d-flex flex-column justify-content-around">
+                                    <div class="o_wblog_post_title  ">
+                                        <span class="text-white text-decoration-none" title="Success Stories">
+                                            <div id="o_wblog_post_name" placeholder="Blog Title">View Vehicle
+                                            </div>
+
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container pt-3">
+
+                        <div class="table-responsive border-0 ">
+                            <table class="o_list_table position-relative table table-sm o_list_table_ungrouped table-striped o_portal_my_doc_table mb-0">
+                                <thead>
+                                    <tr class="active">
+                                        <th>
+                                            <span class="d-none d-md-inline">Vehicle #</span>
+                                        </th>
+                                        <th class="text-end">Name</th>
+                                        <th class="text-end">Category</th>
+                                        <th class="text-end">SubCategory</th>
+                                        <th class="text-end">Number</th>
+                                        <th class="text-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="transport_vehicle_ids" t-as="transport_vehicle_id" t-key="transport_vehicle_id.id">
+                                        <tr>
+
+                                            <td class="text-start">
+                                                <span>
+                                                    <a t-attf-href="/edit_vechicle/{{ transport_vehicle_id.id }}">
+                                                        <t t-esc="transport_vehicle_id.code"/>
+                                                    </a>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span>
+                                                        <t t-esc="transport_vehicle_id.name"/>
+
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span>
+                                                    <t t-esc="transport_vehicle_id.category_id.name"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span>
+                                                    <t t-esc="transport_vehicle_id.subcategory_id.name"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span>
+                                                    <t t-esc="transport_vehicle_id.vechical_number"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span>
+                                                    <t t-esc="transport_vehicle_id.state"/>
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

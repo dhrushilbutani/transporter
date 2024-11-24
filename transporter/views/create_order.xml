@@ -1,0 +1,180 @@
+<odoo>
+    <template id="transporter.create_order_form">
+        <t t-name="Create Order">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="js_blog website_blog">
+                        <div id="o_wblog_blog_top">
+                            <div data-name="Cover" data-use_filters="True" data-use_text_align="True"
+                                 data-res-model="blog.blog" data-res-id="3"
+                                 class="o_record_cover_container d-flex flex-column h-100 o_colored_level o_cc o_cc3   o_wblog_post_page_cover o_record_has_cover cover_auto">
+                                <div class="o_record_cover_component o_record_cover_image "
+                                     style="background-image: none;"></div>
+                                <div class="o_record_cover_component o_record_cover_filter oe_black"
+                                     style="opacity: 0.2;"></div>
+
+
+                                <div class="container position-relative h-100 d-flex flex-column justify-content-around">
+                                    <div class="o_wblog_post_title  ">
+                                        <span class="text-white text-decoration-none" title="Success Stories">
+                                            <div id="o_wblog_post_name" placeholder="Blog Title">Create Order</div>
+
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="oe_website_create_order pt16 pb16 o_colored_level"
+                             data-snippet="s_website_form" data-name="Form" style="background-image: none;">
+                        <div class="container">
+                            <form action="/transporter/create_order" method="post">
+                                <!-- code for map -->
+                                <script
+                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaJQe2iqR2H1tX1Txm7l7YUnosaMOn3J4&amp;callback=initAutocomplete&amp;libraries=places&amp;v=weekly"
+                                        defer="defer"/>
+                                <!-- end map code-->
+                                <div class="oe_website_map">
+
+                                </div>
+                                <div class="s_website_form_rows row s_col_no_bgcolor">
+                                    <div data-name="name"
+                                         class="mb-3 col-12">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content">Name</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="text" name="name"
+                                                       required="1" placeholder=""
+                                                       data-fill-with="undefined" t-attf-value="{{ name }}"
+                                                       readonly="readonly"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="location_id"
+                                         class="mb-3 col-12">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="location_id">
+                                                <span class="s_website_form_label_content">Pickup Location</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <!--                                                <input class="form-control s_website_form_input" type="text"-->
+                                                <!--                                                       name="location_id" required="1" placeholder=""-->
+                                                <!--                                                       id="location_id"/>-->
+                                                <input
+                                                        id="location_id"
+                                                        name="location_id"
+                                                        required="required"
+                                                        autocomplete="off"
+                                                        class="form-control s_website_form_input"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="location_dest_id"
+                                         class=" mb-3 col-12">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="location_dest_id">
+                                                <span class="s_website_form_label_content">Destination Location</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="text"
+                                                       name="location_dest_id" required="1" placeholder=""
+                                                       id="location_dest_id"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="subcategory_id"
+                                         class="mb-3 col-12"
+                                         data-type="char">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="onimbz65e1b">
+                                                <span class="s_website_form_label_content">Types Of Vehicle</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <select class="form-control s_website_form_input" name="subcategory_id"
+                                                        id="subcategory_id">
+                                                    <t t-foreach="transport_subcategory_ids"
+                                                       t-as="transport_subcategory_id"
+                                                       t-key="transport_subcategory_id.id">
+                                                        <option t-attf-value="{{ transport_subcategory_id.id }}">
+                                                            <span t-field="transport_subcategory_id.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="phone"
+                                         class=" mb-3 col-12"
+                                         data-type="tel">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="phone">
+                                                <span class="s_website_form_label_content o_default_snippet_text">Phone
+                                                    Number
+                                                </span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="tel" name="phone"
+                                                       id="phone" required="" t-attf-value="{{ phone }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="email"
+                                         class="mb-3 col-12"
+                                         data-type="email">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="email">
+                                                <span class="s_website_form_label_content">Your Email</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="email"
+                                                       name="email" required="" placeholder="" id="email"
+                                                       t-attf-value="{{ email }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="schedule_date"
+                                         class="mb-3 col-12"
+                                         data-type="email">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="schedule_date">
+                                                <span class="s_website_form_label_content">Schedule Date</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="datetime-local"
+                                                       name="schedule_date" required="1" placeholder=""
+                                                       id="schedule_date"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
+                                        <div style="width: 200px;" class="s_website_form_label"/>
+                                        <button href="#" role="button"
+                                                class="btn btn-primary s_website_form_send o_default_snippet_text">
+                                            Submit
+                                        </button>
+                                        <span id="s_website_form_result"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

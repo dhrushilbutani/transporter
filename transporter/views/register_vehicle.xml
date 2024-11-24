@@ -1,0 +1,336 @@
+<odoo>
+    <template id="transporter.register_vehicle">
+        <t t-name="website.register-vehicle">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="js_blog website_blog">
+                        <div id="o_wblog_blog_top">
+                            <div data-name="Cover" data-use_filters="True" data-use_text_align="True"
+                                 data-res-model="blog.blog" data-res-id="3"
+                                 class="o_record_cover_container d-flex flex-column h-100 o_colored_level o_cc o_cc3   o_wblog_post_page_cover o_record_has_cover cover_auto">
+                                <div class="o_record_cover_component o_record_cover_image "
+                                     style="background-image: none;"></div>
+                                <div class="o_record_cover_component o_record_cover_filter oe_black"
+                                     style="opacity: 0.2;"></div>
+
+
+                                <div class="container position-relative h-100 d-flex flex-column justify-content-around">
+                                    <div class="o_wblog_post_title  ">
+                                        <span class="text-white text-decoration-none" title="Success Stories">
+                                            <div id="o_wblog_post_name" placeholder="Blog Title">Register Your Vehicle
+                                            </div>
+
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <section class="pt16 pb16 o_colored_level" data-name="Form" style="background-image: none;">
+                        <div class="container">
+                            <form action="/transporter/create_vehicle" method="post" enctype="multipart/form-data">
+                                <div class="s_website_form_rows row s_col_no_bgcolor oe_website_register_vehicle">
+                                    <div data-name="name"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required"
+                                         data-type="char">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="o3e7lljoxhme">
+                                                <span class="s_website_form_label_content">Name</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="text" name="name"
+                                                       required="1" placeholder=""
+                                                       data-fill-with="name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div data-name="phone"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required"
+                                         data-type="tel">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="ol7byq783yri">
+                                                <span class="s_website_form_label_content">Phone Number</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="tel"
+                                                       name="phone" placeholder="" id="ol7byq783yri"
+                                                       data-fill-with="phone" required=""
+                                                       t-attf-value="{{ user_id.phone }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="email"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_model_required"
+                                         data-type="email">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="o414j0w73wux">
+                                                <span class="s_website_form_label_content">Your Email</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="email"
+                                                       name="email_from" required="" placeholder="" id="o414j0w73wux"
+                                                       data-fill-with="email" t-attf-value="{{ user_id.email }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="driver_name"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom"
+                                         data-type="char">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="driver_name">
+                                                <span class="s_website_form_label_content o_default_snippet_text">Driver
+                                                    Name
+                                                </span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="text"
+                                                       name="driver_name"
+                                                       id="driver_name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="company_name"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom"
+                                         data-type="char">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="o291di1too2s">
+                                                <span class="s_website_form_label_content o_default_snippet_text">Your
+                                                    Company
+                                                </span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="text"
+                                                       name="company_name" data-fill-with="commercial_company_name"
+                                                       id="o291di1too2s"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="vechicle_number"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_model_required"
+                                         data-type="char">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="olvroh3ofqrh">
+                                                <span class="s_website_form_label_content">Vahicle Number</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="text"
+                                                       name="vechical_number" required="" placeholder="GJ-01-XX-XXXX"
+                                                       id="olvroh3ofqrh"
+                                                       data-fill-with="undefined"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="category_id"
+                                         class="mb-3 col-12"
+                                         data-type="char">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="onimbz65e1b">
+                                                <span class="s_website_form_label_content">Category</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <select class="form-control s_website_form_input oe_website_category_id"
+                                                        name="category_id"
+                                                        id="category_id" required="1">
+                                                    <t t-foreach="transport_category_ids"
+                                                       t-as="transport_category_id"
+                                                       t-key="transport_category_id.id">
+                                                        <option id="category_id"
+                                                                t-attf-value="{{ transport_category_id.id }}">
+                                                            <span t-field="transport_category_id.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="subcategory_id"
+                                         class="mb-3 col-12"
+                                         data-type="char">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="onimbz65e1b">
+                                                <span class="s_website_form_label_content">SubCategory</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <select class="form-control s_website_form_input" name="subcategory_id"
+                                                        id="subcategory_id" required="1">
+                                                    <t t-foreach="transport_subcategory_ids"
+                                                       t-as="transport_subcategory_id"
+                                                       t-key="transport_subcategory_id.id">
+                                                        <option t-attf-value="{{ transport_subcategory_id.id }}">
+                                                            <span t-field="transport_subcategory_id.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="aadhar_number"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required"
+                                         data-type="char">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px" for="ord9ip83fpv">
+                                                <span class="s_website_form_label_content">Aadhar Number</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input class="form-control s_website_form_input" type="text"
+                                                       name="aadhar_number" placeholder="" id="ord9ip83fpv"
+                                                       data-fill-with="undefined" required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="licence_image"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required"
+                                         data-type="binary">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-sm-auto s_website_form_label" style="width: 200px"
+                                                   for="of10ug9dbkcb">
+                                                <span class="s_website_form_label_content">Driving Licence</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="file" class="form-control s_website_form_input"
+                                                       name="licence_image" id="of10ug9dbkcb"
+                                                       data-max-files-number="1" data-max-file-size="5"
+                                                       data-fill-with="undefined" required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="rc_image"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom"
+                                         data-type="binary">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-sm-auto s_website_form_label" style="width: 200px"
+                                                   for="ov1luidrzl6">
+                                                <span class="s_website_form_label_content">Rc Book</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="file" class="form-control s_website_form_input"
+                                                       name="rc_image" id="ov1luidrzl6" data-max-files-number="1"
+                                                       data-max-file-size="5" data-fill-with="undefined" required="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="Field"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_dnone">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content"/>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="hidden" class="form-control s_website_form_input"
+                                                       name="email_to" value="info@yourcompany.example.com"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="puc_image"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom"
+                                         data-type="binary">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-sm-auto s_website_form_label" style="width: 200px"
+                                                   for="oegygrs9isj7">
+                                                <span class="s_website_form_label_content">PUC</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="file" class="form-control s_website_form_input"
+                                                       name="puc_image"
+                                                       id="oegygrs9isj7" data-max-files-number="1"
+                                                       data-max-file-size="1" data-fill-with="undefined" required="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div data-name="vechicle_image"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom"
+                                         data-type="binary">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-sm-auto s_website_form_label" style="width: 200px"
+                                                   for="vechicle_image">
+                                                <span class="s_website_form_label_content">Vehicle Image</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="file" class="form-control s_website_form_input"
+                                                       name="vechicle_image" id="vechicle_image"
+                                                       data-max-files-number="1"
+                                                       data-max-file-size="5" data-fill-with="undefined" required="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-name="description"
+                                         class="s_website_form_field mb-3 col-12 s_website_form_custom"
+                                         data-type="binary">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-sm-auto s_website_form_label" style="width: 200px"
+                                                   for="oegygrs9isj7">
+                                                <span class="s_website_form_label_content"/>
+                                            </label>
+                                            <div class="col-sm">
+                                                <textarea class="form-control s_website_form_input" id="description"
+                                                          name="description" rows="4" cols="50"
+                                                          placeholder="Write about your vehicle..."/>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
+                                        <div style="width: 200px;" class="s_website_form_label"/>
+                                        <button role="button"
+                                                class="btn btn-primary s_website_form_send o_default_snippet_text">
+                                            Submit
+                                        </button>
+                                        <span id="s_website_form_result"/>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- Popup Code -->
+                            <div class="s_website_form_end_message d-none">
+                                <div class="oe_structure">
+                                    <section class="s_text_block pt64 pb64 o_colored_level o_cc o_cc2"
+                                             data-snippet="s_text_block" data-name="Text">
+                                        <div class="container">
+                                            <h2 class="text-center">
+                                                <span class="fa fa-check-circle"/>
+                                                Thank You For Register Vehicle
+                                            </h2>
+                                            <p class="text-center">Our team will approve your vehicle and contact you as
+                                                soon as possible.
+                                                <br/>
+                                                In the meantime we invite you to visit our <a href="/">website</a>.
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- End -->
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
