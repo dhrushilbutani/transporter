@@ -35,6 +35,7 @@ class TransportWebsite(http.Controller):
 
     @http.route("/transporter/create_order", methods=["POST"], type='http', auth='user', website=True, csrf=False)
     def create_order(self, **kwargs):
+        print(kwargs)
         sale_order_data = {
             'partner_id' : request.env.user.partner_id.id,
             'location_id' : kwargs.get('location_id'),
@@ -45,6 +46,11 @@ class TransportWebsite(http.Controller):
             'schedule_date' : datetime.strptime(kwargs.get('schedule_date'),"%Y-%m-%dT%H:%M"),
             'order_line' : [(0,0,{'product_id' : request.env.ref('delivery.product_product_delivery_product_template').sudo().product_variant_id.id,
                                    'product_uom_qty' : 1})],
+            'location_let' : kwargs.get('location_let'),
+            'location_lng' : kwargs.get('location_lng'),
+            'location_dest_lat' : kwargs.get('location_dest_lat'),
+            'location_dest_lng' : kwargs.get('location_dest_lng'),
+            'user_id' : request.env.user.id
         }
         request.env['sale.order'].sudo().create(sale_order_data)
         return request.redirect('/view_order')
@@ -159,3 +165,22 @@ class TransportWebsite(http.Controller):
         vechile_id.write(vehicle_data)
         return request.redirect('/transporter/view_vehicle')
 
+    @http.route("/transporter/view_market_place", methods=["POST","GET"], type='http', auth='user', website=True, csrf=False)
+    def view_market_place(self, **kwargs):
+        sale_order_ids = request.env['sale.order'].search([('state','in',('draft','sent'))])
+        data = {"sale_order_ids": sale_order_ids}
+        print(data)
+        return request.render("transporter.market_place_page", data)
+
+    @http.route("/view_market_place_order/<string:sale_order_id>", type='http', auth='user', website=True, csrf=False)
+    def view_market_place_order(self, sale_order_id):
+        sale_order = request.env['sale.order'].browse(int(sale_order_id))
+        data = {"sale_order_id": sale_order, "transport_subcategory_ids": sale_order.subcategory_id}
+        vechile_id = request.env['transport.vehicle'].sudo().search([('subcategory_id', '=', sale_order.subcategory_id.id),
+                                                           ('create_uid', '=', request.uid),
+                                                           ('state', '=', 'approve')])
+        if vechile_id and sale_order.state in ('draft','sent'):
+            data['take_order_button'] = True
+        data['discuusion_button'] = True
+        data['object'] = sale_order
+        return request.render("transporter.view_market_place_order", data)

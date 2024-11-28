@@ -1,6 +1,6 @@
 <odoo>
-    <template id="transporter.edit_order">
-        <t t-name="Edit Order">
+    <template id="transporter.view_market_place_order">
+        <t t-name="Market Place Order">
             <t t-call="website.layout">
                 <div id="wrap" class="oe_structure oe_empty">
                     <div class="js_blog website_blog">
@@ -16,7 +16,7 @@
                                 <div class="container position-relative h-100 d-flex flex-column justify-content-around">
                                     <div class="o_wblog_post_title  ">
                                         <span class="text-white text-decoration-none" title="Success Stories">
-                                            <div id="o_wblog_post_name" placeholder="Blog Title">Edit Order</div>
+                                            <div id="o_wblog_post_name" placeholder="Blog Title">Order</div>
 
                                         </span>
 
@@ -26,11 +26,12 @@
                             </div>
                         </div>
                     </div>
-                    <section class="pt16 pb16 o_colored_level"
+                    <section class="pt16 pb16 o_colored_level o_market_place_form"
                              data-snippet="s_website_form" data-name="Form" style="background-image: none;">
                         <div class="container">
 
                             <form action="/transporter/update_order" method="post">
+                                <div id="googleMap" class="mb-3" style="width:100%;height:250px;"></div>
                                 <div class="s_website_form_rows row s_col_no_bgcolor">
                                     <input type="hidden" name="sale_order_id" t-attf-value="{{ sale_order_id.id }}"/>
                                     <div data-name="name"
@@ -60,7 +61,7 @@
                                                 <input class="form-control s_website_form_input" type="text"
                                                        name="location_id" required="1" placeholder=""
                                                        t-attf-value="{{ sale_order_id.location_id }}"
-                                                       id="location_id" t-att-readonly="sale_order_id.state == 'sale'"/>
+                                                       id="location_id" readonly="readonly"/>
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +77,7 @@
                                                        name="location_dest_id" required="1" placeholder=""
                                                        id="location_dest_id"
                                                        t-attf-value="{{ sale_order_id.location_dest_id }}"
-                                                       t-att-readonly="sale_order_id.state == 'sale'"/>
+                                                       readonly="readonly"/>
                                             </div>
                                         </div>
                                     </div>
@@ -91,14 +92,15 @@
                                             <div class="col-sm">
                                                 <select class="form-control s_website_form_input" name="subcategory_id"
                                                         id="subcategory_id"
-                                                        t-att-readonly="sale_order_id.state == 'sale'">
+                                                        readonly="readonly">
                                                     <t t-foreach="transport_subcategory_ids"
                                                        t-as="transport_subcategory_id"
                                                        t-key="transport_subcategory_id.id">
-                                                        <option t-attf-value="{{ transport_subcategory_id.id }}"
-                                                                t-attf-selected="{{ sale_order_id.subcategory_id == transport_subcategory_id }}">
-                                                            <span t-field="transport_subcategory_id.name"/>
-                                                        </option>
+                                                        <t t-if="sale_order_id.subcategory_id == transport_subcategory_id">
+                                                            <option t-attf-value="{{ transport_subcategory_id.id }}">
+                                                                <span t-field="transport_subcategory_id.name"/>
+                                                            </option>
+                                                        </t>
                                                     </t>
                                                 </select>
                                             </div>
@@ -117,7 +119,7 @@
                                             <div class="col-sm">
                                                 <input class="form-control s_website_form_input" type="tel" name="phone"
                                                        id="phone" required="" t-attf-value="{{ sale_order_id.phone }}"
-                                                       t-att-readonly="sale_order_id.state == 'sale'"/>
+                                                       readonly="readonly"/>
                                             </div>
                                         </div>
                                     </div>
@@ -133,7 +135,7 @@
                                                 <input class="form-control s_website_form_input" type="email"
                                                        name="email" required="" placeholder="" id="email"
                                                        t-attf-value="{{ sale_order_id.email }}"
-                                                       t-att-readonly="sale_order_id.state == 'sale'"/>
+                                                       readonly="readonly"/>
                                             </div>
                                         </div>
                                     </div>
@@ -150,31 +152,34 @@
                                                        name="schedule_date" required="1" placeholder=""
                                                        id="schedule_date"
                                                        t-attf-value="{{ sale_order_id.schedule_date }}"
-                                                       t-att-readonly="sale_order_id.state == 'sale'"/>
+                                                       readonly="readonly"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <t t-if="sale_order_id.state not in ('sale','cancel')">
+                                    <t t-if="take_order_button">
                                         <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
                                             <div style="width: 200px;" class="s_website_form_label"/>
-                                            <button href="#" role="button"
+                                            <a href="#" role="button"
                                                     class="btn btn-primary s_website_form_send o_default_snippet_text">
-                                                Update
-                                            </button>
-                                            <span id="s_website_form_result"/>
-                                        </div>
-
-                                    </t>
-                                    <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
-                                            <div style="width: 200px;" class="s_website_form_label"/>
-                                            <a t-attf-href="/transporter/cancel_order/{{ sale_order_id.id }}" role="button"
-                                                    class="btn btn-primary s_website_form_send o_default_snippet_text">
-                                                Cancel Order
+                                                Take Order
                                             </a>
                                             <span id="s_website_form_result"/>
                                         </div>
+                                    </t>
+                                    <!--                                    <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">-->
+                                    <!--                                            <div style="width: 200px;" class="s_website_form_label"/>-->
+                                    <!--                                            <a t-attf-href="/transporter/cancel_order/{{ sale_order_id.id }}" role="button"-->
+                                    <!--                                                    class="btn btn-primary s_website_form_send o_default_snippet_text">-->
+                                    <!--                                                Cancel Order-->
+                                    <!--                                            </a>-->
+                                    <!--                                            <span id="s_website_form_result"/>-->
+                                    <!--                                        </div>-->
                                 </div>
                             </form>
+                            <div id="sale_order_communication">
+                                <h3>Communication history</h3>
+                                <t t-call="portal.message_thread"/>
+                            </div>
                         </div>
                     </section>
                 </div>

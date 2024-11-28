@@ -28,6 +28,8 @@ class TransporterVechical(models.Model):
     company_name = fields.Char("Company Name")
 
 
+
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

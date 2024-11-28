@@ -2,15 +2,41 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { loadJS } from "@web/core/assets";
-import { useService } from "@web/core/utils/hooks";
-import { createElement } from "@web/core/utils/xml";
-console.log("LOADED");
-publicWidget.registry.TrnasportWebsite = publicWidget.Widget.extend({
-    selector: '.oe_website_map',
-    events: {
-        'change .oe_website_category_id': '_onChangeCategory'
+
+
+
+
+publicWidget.registry.Transporter = publicWidget.Widget.extend({
+    selector: '.create_order_transport',
+    start: async function () {
+        this._gmapLoaded = await new Promise(resolve => {
+            this.trigger_up('gmap_api_request', {
+                editableMode: true,
+                configureIfNecessary: true,
+                onSuccess: key => {
+                },
+            });
+        });
+
     },
 
 });
 
-export default publicWidget.registry.TrnasportWebsite;
+publicWidget.registry.WebsiteDirection = publicWidget.Widget.extend({
+    selector: '.o_market_place_form',
+    start: async function () {
+        this._gmapLoaded = await new Promise(resolve => {
+            this.trigger_up('gmap_api_request', {
+                editableMode: true,
+                configureIfNecessary: true,
+                onSuccess: key => {
+                },
+            });
+        });
+
+    },
+
+});
+
+export default publicWidget.registry.Transporter;
+export default publicWidget.registry.WebsiteDirection;

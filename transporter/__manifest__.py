@@ -18,7 +18,7 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'website', 'sale_management', 'stock','delivery'],
+    'depends': ['base', 'website', 'sale_management', 'stock','delivery','web','portal'],
 
     # always loaded
     'data': [
@@ -39,13 +39,16 @@ Long description of module's purpose
         'views/thank_you_register_vehicle.xml',
         'views/view_vechile.xml',
         'views/update_vechile.xml',
+        'views/market_place.xml',
+        'views/view_market_place_order.xml',
 
         'views/menu.xml'
 
     ],
     'assets': {
         'web.assets_frontend': [
-            'transporter/static/src/js/transport.js'
+            'transporter/static/src/js/transport.js',
+            'transporter/static/src/js/transport_website_root.js',
         ],
     }
 }

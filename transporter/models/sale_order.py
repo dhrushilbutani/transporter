@@ -12,3 +12,9 @@ class SaleOrder(models.Model):
     schedule_date = fields.Datetime(string="Schedule_date Date",default=fields.datetime.now())
     phone = fields.Char(string="Phone")
     email = fields.Char(string="Email")
+    location_let = fields.Char(string="Location Lat")
+    location_lng = fields.Char(string="Location Lng")
+    location_dest_lat = fields.Char(string="Location Destination Lat")
+    location_dest_lang = fields.Char(string="Location Destination Lng")
+    user_id = fields.Many2one("res.users",domain=[])
+

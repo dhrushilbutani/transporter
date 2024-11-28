@@ -30,16 +30,15 @@
 
                     <section class="oe_website_create_order pt16 pb16 o_colored_level"
                              data-snippet="s_website_form" data-name="Form" style="background-image: none;">
-                        <div class="container">
+                        <div class="container create_order_transport">
                             <form action="/transporter/create_order" method="post">
                                 <!-- code for map -->
-                                <script
-                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaJQe2iqR2H1tX1Txm7l7YUnosaMOn3J4&amp;callback=initAutocomplete&amp;libraries=places&amp;v=weekly"
-                                        defer="defer"/>
+<!--                                <script-->
+<!--                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaJQe2iqR2H1tX1Txm7l7YUnosaMOn3J4&amp;callback=initAutocomplete&amp;libraries=places&amp;v=weekly"-->
+<!--                                        defer="defer"/>-->
                                 <!-- end map code-->
-                                <div class="oe_website_map">
+                                <div id="googleMap" class="mb-3" style="width:100%;height:250px;"></div>
 
-                                </div>
                                 <div class="s_website_form_rows row s_col_no_bgcolor">
                                     <div data-name="name"
                                          class="mb-3 col-12">
@@ -160,6 +159,10 @@
                                         </div>
                                     </div>
 
+                                    <input type="hidden" name="location_let" id="location_let"/>
+                                    <input type="hidden" name="location_lng" id="location_lng"/>
+                                    <input type="hidden" name="location_dest_lat" id="location_dest_lat"/>
+                                    <input type="hidden" name="location_dest_lng" id="location_dest_lng"/>
 
                                     <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
                                         <div style="width: 200px;" class="s_website_form_label"/>
