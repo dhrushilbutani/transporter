@@ -3,12 +3,11 @@
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { loadJS } from "@web/core/assets";
 
-
-
-
 publicWidget.registry.Transporter = publicWidget.Widget.extend({
     selector: '.create_order_transport',
     start: async function () {
+        console.log("><>>>>>>>>>HERE");
+        await this._super(...arguments);
         this._gmapLoaded = await new Promise(resolve => {
             this.trigger_up('gmap_api_request', {
                 editableMode: true,
@@ -25,7 +24,8 @@ publicWidget.registry.Transporter = publicWidget.Widget.extend({
 publicWidget.registry.WebsiteDirection = publicWidget.Widget.extend({
     selector: '.o_market_place_form',
     start: async function () {
-        this._gmapLoaded = await new Promise(resolve => {
+        console.log('Registering');
+        this._gmapLoadedmarketplace = await new Promise(resolve => {
             this.trigger_up('gmap_api_request_market_place', {
                 editableMode: true,
                 configureIfNecessary: true,

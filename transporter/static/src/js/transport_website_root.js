@@ -8,6 +8,7 @@ import { WebsiteRoot } from "@website/js/content/website_root";
 WebsiteRoot.include({
     custom_events: Object.assign({}, WebsiteRoot.custom_events, {
         'gmap_api_request_market_place': '_onGMapAPIRequestMarketPlace',
+        'gmap_api_request' : '_loadGMapAPI'
 
     }),
     init() {
@@ -23,6 +24,7 @@ WebsiteRoot.include({
                 let location_let,location_lng;
                 let location_dest_lat,location_dest_lng;
                 window.odoo_gmap_api_post_load = (async function odoo_gmap_api_post_load() {
+                        console.log("odoo_gmap_api_post_load");
                         this.autocomplate_location_id = new google.maps.places.Autocomplete(
                         document.getElementById('location_id'),
                         {
@@ -101,6 +103,7 @@ WebsiteRoot.include({
                     this._gmapAPILoading = false;
                     return;
                 }
+
                 await loadJS(`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=odoo_gmap_api_post_load&key=${encodeURIComponent(key)}`);
                 if(navigator.geolocation){
                         navigator.geolocation.getCurrentPosition(
@@ -139,8 +142,8 @@ WebsiteRoot.include({
     async _onGMapAPIRequestMarketPlace(editableMode, refetch) {
         console.log("async onGMapAPIRequestMarketPlace");
 
-        if (refetch || !this._gmapAPILoading) {
-            this._gmapAPILoading = new Promise(async resolve => {
+        if (refetch || !this._gmapAPILoadingMarketPlace) {
+            this._gmapAPILoadingMarketPlace = new Promise(async resolve => {
                 const key = await this._getGMapAPIKey(refetch);
                 window.odoo_gmap_api_post_load_market_place = (async function odoo_gmap_api_post_load_market_place() {
 
@@ -201,7 +204,7 @@ WebsiteRoot.include({
                         );
                     }
                     resolve(false);
-                    this._gmapAPILoading = false;
+                    this._gmapAPILoadingMarketPlace = false;
                     return;
                 }
                 await loadJS(`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=odoo_gmap_api_post_load_market_place&key=${encodeURIComponent(key)}`);
@@ -210,7 +213,7 @@ WebsiteRoot.include({
 
             });
         }
-        return this._gmapAPILoading;
+        return this._gmapAPILoadingMarketPlace;
     },
 
 
