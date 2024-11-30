@@ -21,6 +21,7 @@
                             <field name="name" placeholder="Transport Name"/>
                             <field name="category_id" options="{'no_create' : 1,'no_edit' : 1, 'no_create_edit' : 1, 'no_open' : 1}"/>
                             <field name="subcategory_id" domain="[('category_id','=',category_id)]" options="{'no_create' : 1,'no_edit' : 1, 'no_create_edit' : 1, 'no_open' : 1}"/>
+                            <field name="create_uid"/>
                         </group>
                         <group>
                             <field name="driver_name"/>
@@ -56,6 +57,7 @@
             <tree>
                 <field name="code"/>
                 <field name="name"/>
+                <field name="create_uid"/>
                 <field name="category_id"/>
                 <field name="subcategory_id"/>
                 <field name="vechical_number"/>

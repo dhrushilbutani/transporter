@@ -40,6 +40,7 @@
                                         <th class="text-end">Pickup Location</th>
                                         <th class="text-end">Destination Location</th>
                                         <th class="text-end">Status</th>
+                                        <th class="text-end">Delivery Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -77,6 +78,11 @@
                                             <td class="text-end">
                                                 <span>
                                                     <t t-esc="sale_order_id.state"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span>
+                                                    <t t-esc="sale_order_id.delivery_status"/>
                                                 </span>
                                             </td>
                                         </tr>

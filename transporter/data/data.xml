@@ -1,9 +1,5 @@
 <odoo>
     <data>
-        <record id="delivery.product_product_delivery_product_template" model="product.template">
-            <field name="detailed_type">product</field>
-
-        </record>
         <record id="menu_order" model="website.menu">
             <field name="name">Order</field>
             <field name="url">/view_order</field>

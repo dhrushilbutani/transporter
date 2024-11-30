@@ -154,7 +154,28 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <t t-if="sale_order_id.state not in ('sale','cancel')">
+                                    <t t-if="sale_order_id.state == 'sale'">
+                                        <div data-name="order_price"
+                                             class=" mb-3 col-12"
+                                             data-type="tel">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-form-label col-sm-auto s_website_form_label"
+                                                       style="width: 200px" for="phone">
+                                                    <span class="s_website_form_label_content o_default_snippet_text">
+                                                        Order Confirm Price
+                                                    </span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input class="form-control s_website_form_input" type="tel"
+                                                           name="order_confirm_price"
+                                                           id="order_price" required=""
+                                                           t-attf-value="{{ sale_order_id.amount_total }}"
+                                                           readonly="readon;y"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    <t t-if="update_button and sale_order_id.state not in ('sale','cancel')">
                                         <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
                                             <div style="width: 200px;" class="s_website_form_label"/>
                                             <button href="#" role="button"
@@ -166,16 +187,164 @@
 
                                     </t>
                                     <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
-                                            <div style="width: 200px;" class="s_website_form_label"/>
-                                            <a t-attf-href="/transporter/cancel_order/{{ sale_order_id.id }}" role="button"
-                                                    class="btn btn-primary s_website_form_send o_default_snippet_text">
-                                                Cancel Order
-                                            </a>
-                                            <span id="s_website_form_result"/>
+                                        <div class="row">
+                                            <t t-if="assign_vechile_button">
+                                                <div class="col-2">
+                                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                                    <a href="#" data-bs-target="#start_order_popup"
+                                                       data-bs-toggle="modal"
+                                                       role="button"
+                                                       class="btn btn-primary s_website_form_send o_default_snippet_text">
+                                                        Assign Vechile
+                                                    </a>
+                                                </div>
+                                            </t>
+                                            <t t-if="cancel_button and sale_order_id.delivery_status == False or sale_order_id.delivery_status == 'todo'">
+                                                <div class="col-2">
+                                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                                    <a t-attf-href="/transporter/cancel_order/{{ sale_order_id.id }}"
+                                                       role="button"
+                                                       class="btn btn-primary s_website_form_send o_default_snippet_text">
+                                                        Cancel Order
+                                                    </a>
+                                                </div>
+                                            </t>
+
+                                            <t t-if="set_amount_and_transporter">
+                                                <div class="mb-0 py-2 col-12 s_website_form_submit"
+                                                     data-name="Submit Button">
+                                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                                    <a href="#" role="button" data-bs-target="#opne_price_popup"
+                                                       data-bs-toggle="modal"
+                                                       class="btn btn-primary s_website_form_send o_default_snippet_text">
+                                                        Final Order
+                                                    </a>
+                                                    <span id="s_website_form_result"/>
+                                                </div>
+                                            </t>
+
+
                                         </div>
+                                        <span id="s_website_form_result"/>
+                                    </div>
+
+
                                 </div>
                             </form>
+                            <div class="modal fade css_editable_mode_hidden" id="opne_price_popup"
+                                         aria-hidden="true" tabindex="-1">
+                                        <div class="modal-dialog modal-lg pt-5">
+                                            <form method="post" action="/transporter/confirm_order/">
+                                            <div class="modal-content mt-5">
+                                                <div class="modal-content">
+                                                    <input type="hidden" name="sale_order_id"
+                                                           t-attf-value="{{ sale_order_id.id }}"/>
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="o_payment_demo_modal_label">
+                                                            Enter Your Payment Amount
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div>
+                                                            <div class="row gap2 gap-md-0">
+                                                                <div class="col-6 col-md mt-0 mb-0">
+                                                                    <label for="customer_input" class="mt-0">
+                                                                        <small>Select Transporter</small>
+                                                                    </label>
+                                                                    <select class="form-control s_website_form_input"
+                                                                            name="transporter_user_id"
+                                                                            id="transporter_user_id" required="required">
+                                                                        <t t-foreach="transporter_user_ids"
+                                                                           t-as="transporter_user_id"
+                                                                           t-key="transporter_user_id.id">
+                                                                            <option t-attf-value="{{ transporter_user_id.id }}">
+                                                                                <span t-field="transporter_user_id.name"/>
+                                                                            </option>
+                                                                        </t>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="col-6 col-md mt-0 mb-0">
+                                                                    <label for="customer_input" class="mt-0">
+                                                                        <small>Amount</small>
+                                                                    </label>
+                                                                    <input type="number" name="customer_input"
+                                                                           id="customer_input" class="form-control"
+                                                                           required="required"
+                                                                           placeholder="350"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="float-end mt-2" data-provider-id="6">
+
+                                                            <button name="o_payment_submit_button" type="submit"
+                                                                    class="btn btn-primary w-100 w-md-auto ms-auto px-5">
+                                                                Confirm Order
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                            <!-- popup code -->
+                            <div class="modal fade css_editable_mode_hidden" id="start_order_popup"
+                                 aria-hidden="true" tabindex="-1">
+                                <div class="modal-dialog modal-lg pt-5">
+                                    <form method="post" t-attf-action="/confirm_vechile/{{ sale_order_id.id }}">
+                                        <div class="modal-content mt-5">
+                                            <div class="modal-content">
+                                                <input type="hidden" name="sale_order_id"
+                                                       t-attf-value="{{ sale_order_id.id }}"/>
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="o_payment_demo_modal_label">
+                                                        Add Your Vechile
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <div class="row gap2 gap-md-0">
+                                                            <div class="col-6 col-md mt-0 mb-0">
+                                                                <label for="customer_input" class="mt-0">
+                                                                    <small>Select Vechile</small>
+                                                                </label>
+                                                                <select class="form-control s_website_form_input"
+                                                                        name="vechile_id"
+                                                                        id="vechile_id" required="required">
+                                                                    <t t-foreach="vechile_ids"
+                                                                       t-as="vechile_id"
+                                                                       t-key="vechile_id.id">
+                                                                        <option t-attf-value="{{ vechile_id.id }}">
+                                                                            <span t-field="vechile_id.code"/>
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="float-end mt-2" data-provider-id="6">
+
+                                                        <button name="o_payment_submit_button" type="submit"
+                                                                class="btn btn-primary w-100 w-md-auto ms-auto px-5">
+                                                            Confirm Vechile
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- end-->
+                            <div id="sale_order_communication">
+                                <h3>Communication history</h3>
+                                <t t-call="portal.message_thread"/>
+                            </div>
                         </div>
+
                     </section>
                 </div>
             </t>

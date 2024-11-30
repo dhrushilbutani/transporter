@@ -67,6 +67,21 @@ class TransportWebsite(http.Controller):
     def edit_order(self,sale_order_id):
         sale_order = request.env['sale.order'].browse(int(sale_order_id))
         data = {"sale_order_id" : sale_order,"transport_subcategory_ids" : sale_order.category_id.subcategory_ids}
+        data["object"] = sale_order
+        data['assign_vechile_button'] = True if sale_order.transporter_user_id == request.env.user and not sale_order.vehicle_id else False
+        if data.get('assign_vechile_button'):
+            vechile_ids = request.env['transport.vehicle'].search([('create_uid','=',request.env.user.id)])
+            data['vechile_ids'] = vechile_ids
+        if sale_order.user_id == request.env.user:
+            data['update_button'] = True
+            data['cancel_button'] = True
+        elif sale_order.transporter_user_id == request.env.user:
+            data['cancel_button'] = True
+        if sale_order.state in ('draft','sent') and sale_order.create_uid == request.env.user:
+            data['set_amount_and_transporter'] = True
+        transporter_user_ids = request.env['transport.vehicle'].sudo().search(
+            [('subcategory_id', '=', sale_order.subcategory_id.id)]).create_uid
+        data['transporter_user_ids'] = transporter_user_ids
         return request.render("transporter.edit_order",data)
 
     @http.route("/transporter/update_order", methods=["POST"], type='http', auth='user', website=True, csrf=False)
@@ -168,6 +183,10 @@ class TransportWebsite(http.Controller):
     @http.route("/transporter/view_market_place", methods=["POST","GET"], type='http', auth='user', website=True, csrf=False)
     def view_market_place(self, **kwargs):
         sale_order_ids = request.env['sale.order'].search([('state','in',('draft','sent'))])
+        sale_order_ids += request.env['sale.order'].search(['&',('state','=','sale'),
+                                                             '|',
+                                                             ('transporter_user_id','=',request.env.user.id),
+                                                            ('user_id','=',request.env.user.id)])
         data = {"sale_order_ids": sale_order_ids}
         print(data)
         return request.render("transporter.market_place_page", data)
@@ -176,11 +195,37 @@ class TransportWebsite(http.Controller):
     def view_market_place_order(self, sale_order_id):
         sale_order = request.env['sale.order'].browse(int(sale_order_id))
         data = {"sale_order_id": sale_order, "transport_subcategory_ids": sale_order.subcategory_id}
-        vechile_id = request.env['transport.vehicle'].sudo().search([('subcategory_id', '=', sale_order.subcategory_id.id),
-                                                           ('create_uid', '=', request.uid),
-                                                           ('state', '=', 'approve')])
-        if vechile_id and sale_order.state in ('draft','sent'):
-            data['take_order_button'] = True
+        transporter_user_ids = request.env['transport.vehicle'].sudo().search([('subcategory_id', '=',sale_order.subcategory_id.id)]).create_uid
+        data['transporter_user_ids'] = transporter_user_ids
+
+        if sale_order.state in ('draft','sent') and sale_order.create_uid == request.env.user:
+            data['set_amount_and_transporter'] = True
         data['discuusion_button'] = True
         data['object'] = sale_order
+        if sale_order.delivery_status == 'in_progress' and sale_order.transporter_user_id == request.env.user:
+            data['delivered_and_invoice_button'] = True
+        print(data)
         return request.render("transporter.view_market_place_order", data)
+
+    @http.route("/transporter/confirm_order", type='http', auth='user', website=True, csrf=False)
+    def confirm_order(self,**kwargs):
+        sale_order_id = request.env['sale.order'].browse(int(kwargs.get('sale_order_id')))
+        price = float(kwargs.get('customer_input'))
+        transporter_user_id = int(kwargs.get('transporter_user_id'))
+        sale_order_id.order_line[0].sudo().write({'price_unit' : price})
+        sale_order_id.sudo().write({'transporter_user_id' : transporter_user_id})
+        sale_order_id.sudo().action_confirm()
+        return request.render("transporter.thank_you_order_confirm")
+
+    @http.route("/confirm_vechile/<string:sale_order_id>", type='http', auth='user', website=True, csrf=False)
+    def confirm_vechile(self, **kwargs):
+        sale_order_id = request.env['sale.order'].browse(int(kwargs.get('sale_order_id')))
+        sale_order_id.sudo().write({'vehicle_id' : int(kwargs.get('vechile_id')) if kwargs.get('vechile_id') else False})
+        sale_order_id.sudo().write({'delivery_status' : 'in_progress'})
+        return request.redirect(f'/view_market_place_order/{ sale_order_id.id }')
+
+    @http.route("/delivered_order/<string:sale_order_id>", type='http', auth='user', website=True, csrf=False)
+    def delivered_order(self, sale_order_id):
+        sale_order_id = request.env['sale.order'].browse(int(sale_order_id))
+        sale_order_id.sudo().write({'delivery_status' : 'done'})
+        return request.render('transporter.thank_you_delivered_order')

@@ -18,7 +18,7 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'website', 'sale_management', 'stock','delivery','web','portal'],
+    'depends': ['base', 'website', 'sale_management', 'web', 'portal'],
 
     # always loaded
     'data': [
@@ -41,6 +41,8 @@ Long description of module's purpose
         'views/update_vechile.xml',
         'views/market_place.xml',
         'views/view_market_place_order.xml',
+        'views/thank_you_order_confirm.xml',
+        'views/thank_you_delivered_order.xml',
 
         'views/menu.xml'
 
@@ -49,6 +51,7 @@ Long description of module's purpose
         'web.assets_frontend': [
             'transporter/static/src/js/transport.js',
             'transporter/static/src/js/transport_website_root.js',
+            'transporter/static/src/css/style.css',
         ],
     }
 }
