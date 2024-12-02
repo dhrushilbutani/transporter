@@ -8,7 +8,8 @@ import { WebsiteRoot } from "@website/js/content/website_root";
 WebsiteRoot.include({
     custom_events: Object.assign({}, WebsiteRoot.custom_events, {
         'gmap_api_request_market_place': '_onGMapAPIRequestMarketPlace',
-        'gmap_api_request' : '_loadGMapAPI'
+        'gmap_api_request' : '_loadGMapAPI',
+        'google_language_added' : '_onLanguageAdded',
 
     }),
     init() {
@@ -215,6 +216,25 @@ WebsiteRoot.include({
         }
         return this._gmapAPILoadingMarketPlace;
     },
+
+
+    async _onLanguageAdded(editableMode, refetch) {
+        console.log("async _onLanguageAdded");
+
+            this._googleTrnsalater = new Promise(async resolve => {
+                window.googleTranslateElementInit = (async function googleTranslateElementInit() {
+                       new google.translate.TranslateElement(
+                {pageLanguage: 'en',
+//                includedLanguages: "zh-CN,en,ja,ko"
+                },
+                'google_translate_element'
+            );
+                }).bind(this);
+                });
+
+            await loadJS(`https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`);
+            return this._googleTrnsalater;
+        },
 
 
    handleLocationError: function(browserHasGeolocation, infoWindow, pos) {

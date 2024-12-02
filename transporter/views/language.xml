@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template inherit_id='website.header_language_selector' id="product_picture_magnify_hover"
+              name="Automatic Image Zoom">
+        <xpath expr='//li' position='replace'>
+            <li>
+            <div id="google_translate_element" class="google_translate_element"/>
+            </li>
+        </xpath>
+    </template>
+</odoo>

@@ -43,6 +43,7 @@ Long description of module's purpose
         'views/view_market_place_order.xml',
         'views/thank_you_order_confirm.xml',
         'views/thank_you_delivered_order.xml',
+        'views/language.xml',
 
         'views/menu.xml'
 

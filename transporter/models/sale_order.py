@@ -21,11 +21,64 @@ class SaleOrder(models.Model):
     user_id = fields.Many2one("res.users",domain=[])
     transporter_user_id = fields.Many2one("res.users","Transporter User")
     delivery_status = fields.Selection([('todo','To Do'),('in_progress','In progress'),('done','Done'),('cancel','Cancel')])
+    razorpay_order_id = fields.Char()
+    razorpay_payment_id = fields.Char()
 
     def action_confirm(self):
         res = super(SaleOrder, self).action_confirm()
         self.delivery_status = 'todo'
         return res
+
+    def create_order_razor_pay(self):
+        self.ensure_one()
+        self = self.sudo()
+        payment_provider_id = self.env['payment.provider'].search([('code','=','razorpay')],limit=1)
+        if not payment_provider_id:
+            raise ValidationError("Razorpay payment provider not found.")
+        key_id = payment_provider_id.razorpay_key_id
+        key_secret = payment_provider_id.razorpay_key_secret
+        url = "https://api.razorpay.com/v1/orders"
+        header = {"content-type": "application/json" }
+        data = {
+            "amount" : self.amount_total,
+            "currency": "INR",
+            "receipt": self.name,
+        }
+        res = requests.post(url,headers=header,json=data,auth=(key_id,key_secret))
+        print(res.status_code)
+        if res.status_code != 200:
+            return {"status" : res.status_code,"error":res.text }
+        else:
+            status_code = res.status_code
+            res = res.json()
+            print(res)
+            self.razorpay_order_id = res['id']
+        callback_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        return {"status" : status_code,
+                "key_id" : key_id,
+                "order_id" :  res['id'],
+                "amount" : self.amount_total,
+                "currency": "INR",
+
+                "name": self.company_id.name,
+                "description": "",
+                "image": "",
+                "callback_url": callback_url,
+                "prefill": {
+                    "name": self.partner_id.name,
+                    "email": self.partner_id.email or False,
+                    "contact": self.partner_id.phone or False
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+
+                }
+
+
 
     def get_steps(self):
         self.ensure_one()
@@ -51,3 +104,30 @@ class SaleOrder(models.Model):
                     step["end_location"]
                 )
             return direction_list
+
+
+    def payment_done(self,razorpay_payment_id):
+        self.ensure_one()
+        self = self.sudo()
+        self.razorpay_payment_id = razorpay_payment_id
+        move_ids = self._create_invoices()
+        move_ids.action_post()
+        self.register_payment(move_ids[0])
+
+    def register_payment(self,move_id):
+        bank_journal_id = self.env['account.journal'].search([('type', '=', 'bank')], limit=1)
+        if not bank_journal_id:
+            raise ValidationError("Bank Journal not found")
+        register_payment_id = self.env['account.payment.register'].sudo().with_context({
+                'active_model': 'account.move',
+                'active_ids': [move_id.id],
+                'active_id': move_id.id,
+            }).with_company(self.company_id.id).create({
+            'journal_id' : bank_journal_id.id,
+            'amount' : move_id.amount_total,
+            'communication' : move_id.name
+        })
+        register_payment_id.action_create_payments()
+
+
+

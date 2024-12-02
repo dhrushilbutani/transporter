@@ -41,6 +41,7 @@
                                         <th class="text-end">Destination Location</th>
                                         <th class="text-end">Status</th>
                                         <th class="text-end">Delivery Status</th>
+                                        <th class="text-end">Invoice Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -83,6 +84,11 @@
                                             <td class="text-end">
                                                 <span>
                                                     <t t-esc="sale_order_id.delivery_status"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <span>
+                                                    <t t-esc="sale_order_id.invoice_status"/>
                                                 </span>
                                             </td>
                                         </tr>

@@ -82,6 +82,9 @@ class TransportWebsite(http.Controller):
         transporter_user_ids = request.env['transport.vehicle'].sudo().search(
             [('subcategory_id', '=', sale_order.subcategory_id.id)]).create_uid
         data['transporter_user_ids'] = transporter_user_ids
+        if sale_order.delivery_status == 'done' and sale_order.invoice_status == 'to invoice' and sale_order.user_id == request.env.user:
+            data['create_payment'] = True
+        print(data)
         return request.render("transporter.edit_order",data)
 
     @http.route("/transporter/update_order", methods=["POST"], type='http', auth='user', website=True, csrf=False)
@@ -201,6 +204,8 @@ class TransportWebsite(http.Controller):
         if sale_order.state in ('draft','sent') and sale_order.create_uid == request.env.user:
             data['set_amount_and_transporter'] = True
         data['discuusion_button'] = True
+        if sale_order.delivery_status == 'done' and sale_order.invoice_status == 'to invoice' and sale_order.user_id == request.env.user:
+            data['create_payment'] = True
         data['object'] = sale_order
         if sale_order.delivery_status == 'in_progress' and sale_order.transporter_user_id == request.env.user:
             data['delivered_and_invoice_button'] = True
@@ -229,3 +234,4 @@ class TransportWebsite(http.Controller):
         sale_order_id = request.env['sale.order'].browse(int(sale_order_id))
         sale_order_id.sudo().write({'delivery_status' : 'done'})
         return request.render('transporter.thank_you_delivered_order')
+

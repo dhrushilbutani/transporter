@@ -29,16 +29,22 @@
                     <section class="pt16 pb16 o_colored_level o_market_place_form"
                              data-snippet="s_website_form" data-name="Form" style="background-image: none;">
                         <div class="container">
-
+                            <t t-if="sale_order_id.delivery_status == 'in_progress'">
+                                <div class="o_share_live_location"/>
+                            </t>
                             <form action="/transporter/confirm_order" method="post">
                                 <div id="googleMapDirection" class="mb-3" style="width:100%;height:250px;"></div>
                                 <div class="s_website_form_rows row s_col_no_bgcolor">
-                                    <input type="hidden" id="sale_order_id" name="sale_order_id" t-attf-value="{{ sale_order_id.id }}"/>
-                                    <input type="hidden" id="location_let" name="location_let" t-attf-value="{{ sale_order_id.location_let }}"/>
-                                    <input type="hidden" id="location_lng" name="location_lng" t-attf-value="{{ sale_order_id.location_lng }}"/>
-                                    <input type="hidden" id="location_dest_lat" name="location_dest_lat" t-attf-value="{{ sale_order_id.location_dest_lat }}"/>
-                                    <input type="hidden" id="location_dest_lng" name="location_dest_lng" t-attf-value="{{ sale_order_id.location_dest_lng }}"/>
-
+                                    <input type="hidden" id="sale_order_id" name="sale_order_id"
+                                           t-attf-value="{{ sale_order_id.id }}"/>
+                                    <input type="hidden" id="location_let" name="location_let"
+                                           t-attf-value="{{ sale_order_id.location_let }}"/>
+                                    <input type="hidden" id="location_lng" name="location_lng"
+                                           t-attf-value="{{ sale_order_id.location_lng }}"/>
+                                    <input type="hidden" id="location_dest_lat" name="location_dest_lat"
+                                           t-attf-value="{{ sale_order_id.location_dest_lat }}"/>
+                                    <input type="hidden" id="location_dest_lng" name="location_dest_lng"
+                                           t-attf-value="{{ sale_order_id.location_dest_lng }}"/>
 
 
                                     <div data-name="name"
@@ -176,61 +182,61 @@
                                     </t>
 
 
-
                                     <div class="modal fade css_editable_mode_hidden" id="opne_price_popup"
                                          aria-hidden="true" tabindex="-1">
                                         <div class="modal-dialog modal-lg pt-5">
                                             <form method="post" action="/transporter/confirm_order/">
-                                            <div class="modal-content mt-5">
-                                                <div class="modal-content">
-                                                    <input type="hidden" name="sale_order_id"
-                                                           t-attf-value="{{ sale_order_id.id }}"/>
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="o_payment_demo_modal_label">
-                                                            Enter Your Payment Amount
-                                                        </h5>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div>
-                                                            <div class="row gap2 gap-md-0">
-                                                                <div class="col-6 col-md mt-0 mb-0">
-                                                                    <label for="customer_input" class="mt-0">
-                                                                        <small>Select Transporter</small>
-                                                                    </label>
-                                                                    <select class="form-control s_website_form_input"
-                                                                            name="transporter_user_id"
-                                                                            id="transporter_user_id" required="required">
-                                                                        <t t-foreach="transporter_user_ids"
-                                                                           t-as="transporter_user_id"
-                                                                           t-key="transporter_user_id.id">
-                                                                            <option t-attf-value="{{ transporter_user_id.id }}">
-                                                                                <span t-field="transporter_user_id.name"/>
-                                                                            </option>
-                                                                        </t>
-                                                                    </select>
-                                                                </div>
+                                                <div class="modal-content mt-5">
+                                                    <div class="modal-content">
+                                                        <input type="hidden" name="sale_order_id"
+                                                               t-attf-value="{{ sale_order_id.id }}"/>
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="o_payment_demo_modal_label">
+                                                                Enter Your Payment Amount
+                                                            </h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div>
+                                                                <div class="row gap2 gap-md-0">
+                                                                    <div class="col-6 col-md mt-0 mb-0">
+                                                                        <label for="customer_input" class="mt-0">
+                                                                            <small>Select Transporter</small>
+                                                                        </label>
+                                                                        <select class="form-control s_website_form_input"
+                                                                                name="transporter_user_id"
+                                                                                id="transporter_user_id"
+                                                                                required="required">
+                                                                            <t t-foreach="transporter_user_ids"
+                                                                               t-as="transporter_user_id"
+                                                                               t-key="transporter_user_id.id">
+                                                                                <option t-attf-value="{{ transporter_user_id.id }}">
+                                                                                    <span t-field="transporter_user_id.name"/>
+                                                                                </option>
+                                                                            </t>
+                                                                        </select>
+                                                                    </div>
 
-                                                                <div class="col-6 col-md mt-0 mb-0">
-                                                                    <label for="customer_input" class="mt-0">
-                                                                        <small>Amount</small>
-                                                                    </label>
-                                                                    <input type="number" name="customer_input"
-                                                                           id="customer_input" class="form-control"
-                                                                           required="required"
-                                                                           placeholder="350"/>
+                                                                    <div class="col-6 col-md mt-0 mb-0">
+                                                                        <label for="customer_input" class="mt-0">
+                                                                            <small>Amount</small>
+                                                                        </label>
+                                                                        <input type="number" name="customer_input"
+                                                                               id="customer_input" class="form-control"
+                                                                               required="required"
+                                                                               placeholder="350"/>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="float-end mt-2" data-provider-id="6">
+                                                            <div class="float-end mt-2" data-provider-id="6">
 
-                                                            <button name="o_payment_submit_button" type="submit"
-                                                                    class="btn btn-primary w-100 w-md-auto ms-auto px-5">
-                                                                Confirm Order
-                                                            </button>
+                                                                <button name="o_payment_submit_button" type="submit"
+                                                                        class="btn btn-primary w-100 w-md-auto ms-auto px-5">
+                                                                    Confirm Order
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </form>
                                         </div>
                                     </div>
@@ -238,15 +244,28 @@
 
                             </form>
                             <t t-if="delivered_and_invoice_button">
-                                        <div class="mb-0 py-2 col-12 s_website_form_submit">
-                                            <div style="width: 200px;" class="s_website_form_label"/>
-                                            <a t-attf-href="/delivered_order/{{ sale_order_id.id }}" role="button"
-                                               class="btn btn-primary s_website_form_send o_default_snippet_text">
-                                                Delivered
-                                            </a>
-                                            <span id="s_website_form_result"/>
-                                        </div>
-                                    </t>
+                                <div class="mb-0 py-2 col-12 s_website_form_submit">
+                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                    <a t-attf-href="/delivered_order/{{ sale_order_id.id }}" role="button"
+                                       class="btn btn-primary s_website_form_send o_default_snippet_text">
+                                        Delivered
+                                    </a>
+                                    <span id="s_website_form_result"/>
+                                </div>
+                            </t>
+
+                            <t t-if="create_payment">
+                                <div class="mb-0 py-2 col-12 s_website_form_submit">
+                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                    <a name="o_payment_submit_transporter o_payment_submit_transporter"  role="button"
+                                       class="btn btn-primary s_website_form_send o_default_snippet_text o_payment_submit_transporter"
+                                    t-attf-data-sale-order-id="{{ sale_order_id.id }}">
+                                        Create Patyment
+                                    </a>
+                                    <span id="s_website_form_result"/>
+                                </div>
+                            </t>
+
                             <div id="sale_order_communication">
                                 <h3>Communication history</h3>
                                 <t t-call="portal.message_thread"/>
