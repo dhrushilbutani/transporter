@@ -7,3 +7,11 @@ header .navbar-brand.logo img {
 .o_header_affixed.o_header_is_scrolled .navbar-brand img {
     height: 4rem;
 }
+
+main {
+    background: transparent !important;
+}
+
+section {
+    background-color: white;
+}

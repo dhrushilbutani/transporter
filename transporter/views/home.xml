@@ -3,7 +3,7 @@
         <t name="Homepage" t-name="Homepage">
             <t t-call="website.layout">
                 <div id="wrap" class="oe_structure">
-                    <section class="s_cover parallax s_parallax_is_fixed bg-black-50 pt96 pb96"
+                    <!--section class="s_cover parallax s_parallax_is_fixed bg-black-50 pt96 pb96"
                              data-scroll-background-ratio="1" data-snippet="s_cover">
                         <span class="s_parallax_bg oe_img_bg"
                               style="background-image: url('/web/image/website.s_cover_default_image'); background-position: 50% 0;"/>
@@ -21,34 +21,55 @@
                                 <a class="btn btn-primary" href="/contactus">Contact Us</a>
                             </p>
                         </div>
-                    </section>
-                    <section class="s_product_list o_colored_level" data-snippet="s_product_list" data-name="Items"
-                             style="background-image: none;">
-
-
-                        <div class="container-fluid">
-                            <div class="row">
-                                <t t-foreach="transport_category_ids" t-as="transport_category_id"
-                                   t-key="transport_category_id.id">
-                                    <div class="col-lg-2">
-                                        <a t-attf-href="/create_order_view/{{ transport_category_id.id }}">
-                                            <img t-att-src="image_data_uri(transport_category_id.website_image)" alt=""
-                                                 class="img img-fluid" loading="lazy"/>
-                                        </a>
-                                        <div class="s_product_list_item_link">
-                                            <a class="btn btn-secondary o_default_snippet_text" t-attf-href="/create_order_view/{{ transport_category_id.id }}"
-                                               data-bs-original-title="" title="" aria-describedby="popover913338">
-                                                <span t-field="transport_category_id.name"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </t>
+                    </section-->
+                    <section class="s_cover parallax s_parallax_is_fixed bg-black-50 pt96 pb96 o_colored_level mb32" data-scroll-background-ratio="1" data-snippet="s_cover" data-name="Cover" style="background-image: none;border-radius: 10px;">
+                        <span class="s_parallax_bg oe_img_bg" style="background-image: url('/transporter/static/src/img/book_truck.jpg'); background-position: 50% 0;"/>
+                        <div class="o_we_bg_filter bg-black-50"/>
+                        <div class="container s_allow_columns">
+                            <!--h1 class="display-3 o_default_snippet_text" style="text-align: center; font-weight: bold;">Catchy Headline</h1-->
+                            <div class="row align-items-center">
+                                <div class="col-lg-4  text-end pt16 pb16">
+                                    <h1>Track</h1>
+                                </div>
+                                <div class="col-lg-4  text-center pt16 pb16">
+                                    <h1>Deliver</h1>
+                                </div>
+                                <div class="col-lg-4  text-start pt16 pb16">
+                                    <h1>Transform</h1>
+                                </div>
                             </div>
+                            <p class="lead o_default_snippet_text" style="text-align: center;">Revolutionizing logistics and supply chain management in
+the world.</p>
+                            <p style="text-align: center;">
+                                <a class="btn btn-primary o_default_snippet_text" href="/create_order_view/1">Book now</a>
+                            </p>
                         </div>
-
-
                     </section>
-                    <section class="s_text_image pt32 pb32" data-snippet="s_text_image">
+<!--                    <section class="s_product_list o_colored_level mb32" data-snippet="s_product_list" data-name="Items" style="border-radius:10px">-->
+
+<!--                        <div class="container-fluid">-->
+<!--                            <div class="row">-->
+<!--                                <t t-foreach="transport_category_ids" t-as="transport_category_id"-->
+<!--                                   t-key="transport_category_id.id">-->
+<!--                                    <div class="col-lg-2">-->
+<!--                                        <a t-attf-href="/create_order_view/{{ transport_category_id.id }}">-->
+<!--                                            <img t-att-src="image_data_uri(transport_category_id.website_image)" alt=""-->
+<!--                                                 class="img img-fluid" loading="lazy"/>-->
+<!--                                        </a>-->
+<!--                                        <div class="s_product_list_item_link">-->
+<!--                                            <a class="btn btn-secondary o_default_snippet_text" t-attf-href="/create_order_view/{{ transport_category_id.id }}"-->
+<!--                                               data-bs-original-title="" title="" aria-describedby="popover913338">-->
+<!--                                                <span t-field="transport_category_id.name"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </t>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
+<!--                    </section>-->
+                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px">
                         <div class="container">
                             <div class="row align-items-center">
                                 <div class="col-lg-6 pt16 pb16">
@@ -69,7 +90,107 @@
                             </div>
                         </div>
                     </section>
-                    <section class="s_numbers o_cc o_cc2 pt24 pb24" data-snippet="s_numbers">
+                    <section class="pt32 pb32 mb32" style="border-radius:10px">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-4  text-center pt16 pb16">
+                                    <h2>Track</h2>
+                                </div>
+                                <div class="col-lg-4  text-center pt16 pb16">
+                                    <h2>Deliver</h2>
+                                </div>
+                                <div class="col-lg-4  text-center pt16 pb16">
+                                    <h2>Transform</h2>
+                                </div>
+                                <div class="col-lg-12  text-center pt16 pb16">
+                                    <h4>Revolutionizing logistics and supply chain management in
+the world.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="pt32 pb32 mb32" style="border-radius:10px">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12  text-center pt16 pb16">
+                                    <h4>We empower suppliers and transporters for business that
+ensure Trackability Transparency Efficiency</h4>
+                                </div>
+                                <div class="col-lg-4  text-end pt16 pb16">
+                                    <h2>Trackability</h2>
+                                </div>
+                                <div class="col-lg-4  text-center pt16 pb16">
+                                    <h2>Transparency</h2>
+                                </div>
+                                <div class="col-lg-4  text-start pt16 pb16">
+                                    <h2>Efficiency</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 pt16 pb16">
+                                    <h2>Who We Are?</h2>
+                                </div>
+                                <div class="col-lg-6 pt16 pb16">
+                                    <img src="/web/image/website.s_text_image_default_image"
+                                         class="img img-fluid mx-auto"
+                                         alt="" loading="lazy"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 pt16 pb16">
+                                    <img src="/web/image/website.s_text_image_default_image"
+                                         class="img img-fluid mx-auto"
+                                         alt="" loading="lazy"/>
+                                </div>
+                                <div class="col-lg-6 pt16 pb16">
+                                    <h2>What We Offer?</h2>
+                                    <ul>
+                                        <li>Real time gps tracking</li>
+                                        <li>Marketplace for transporters</li>
+                                        <li>Chat Feature</li>
+                                        <li>Multi language support for suppliers and transporters</li>
+                                        <li>Easy to use dashboards tailored for seamless
+interactions</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 pt16 pb16">
+                                    <h2>Why Choose Us?</h2>
+                                    <ul>
+                                        <li>
+                                            Real-Time Tracking:<br/>
+                                            Stay updated with GPS-powered live tracking for
+                                            seamless delivery management.
+                                        </li>
+                                        <li>
+                                            Designed for Everyone:<br/>
+                                            A user-friendly, multilingual app that simplifies logistics
+                                            for all.
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6 pt16 pb16">
+                                    <img src="/web/image/website.s_text_image_default_image"
+                                         class="img img-fluid mx-auto"
+                                         alt="" loading="lazy"/>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="s_numbers o_cc o_cc2 pt24 pb24" data-snippet="s_numbers" style="border-radius:10px">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-3 text-center pt24 pb24">

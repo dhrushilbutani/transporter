@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal.portal_layout" name="Portal Layout">
+        <t t-call="portal.frontend_layout">
+            <t t-set="is_portal" t-value="True"/>
+
+            <div t-if="not no_breadcrumbs and not my_details and not breadcrumbs_searchbar"
+                 class="o_portal container mt-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <t t-call="portal.portal_breadcrumbs"/>
+                    <t t-if="prev_record or next_record" t-call="portal.record_pager"/>
+                </div>
+            </div>
+            <div id="wrap" class="o_portal_wrap" style="background:white">
+                <div class="container pt-3">
+                    <t t-if="my_details">
+                        <div class="wrapper col-12 d-flex flex-wrap justify-content-between align-items-center">
+                            <h3 class="my-3">My account</h3>
+                            <button class="btn py-0 d-flex align-items-center gap-2 d-lg-none ms-auto"
+                                    data-bs-toggle="offcanvas" data-bs-target="#accountOffCanvas">
+                                <img class="o_avatar rounded" t-att-src="image_data_uri(user_id.partner_id.avatar_1024)"
+                                     alt="Contact"/>
+                            </button>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div t-attf-class="o_portal_content col-12 col-lg-8 mb-5" style="display:none">
+                                <t t-out="0"/>
+                            </div>
+                            <div class="col-lg-8">
+                                <section class="pt32 pb32 o_cc o_cc1 o_colored_level" data-snippet="s_donation"
+                                         data-name="Donation" style="background-image: none;">
+                                    <div class="container o_withdrawal_class">
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-7 pt16 pb16 o_colored_level">
+                                                <h2 class="o_default_snippet_text">Wallet:
+                                                    <span class="wallet_amount" t-esc="partner_id.remaning"/>
+                                                </h2>
+
+                                                <div>
+                                                    <form class="s_widharaw_form" action="/withdraw/pay" method="post"
+                                                          enctype="multipart/form-data">
+                                                        <div class="s_donation_prefilled_buttons my-4">
+                                                            <div class="d-sm-flex align-items-center my-3">
+                                                                <input class="form-control s_website_form_input o_donation_amount"
+                                                                       type="number" name="donation_amount"
+                                                                       min="1"
+                                                                       t-att-max="partner_id.remaning"
+                                                                       id="donation_amount" required=""
+                                                                       placeholder="Enter Amount"/>
+                                                            </div>
+                                                            <div class="d-sm-flex align-items-center">
+                                                                <select class="form-control s_website_form_input"
+                                                                        name="selected_bank_account_id"
+                                                                        id="selected_bank_account_id">
+                                                                    <t t-foreach="bank_account_ids"
+                                                                       t-as="bank_account_id"
+                                                                       t-key="bank_account_id.id">
+                                                                        <option t-attf-value="{{ bank_account_id.id }}">
+                                                                            <span>
+                                                                                <t t-esc="bank_account_id.acc_number"/>
+                                                                                -
+                                                                                <t t-esc="bank_account_id.bank_id.name"/>
+                                                                            </span>
+                                                                        </option>
+                                                                    </t>
+                                                                     </select>
+                                                            </div>
+
+                                                            <!--                                                            <div class="d-sm-flex align-items-center my-3 o_bank_name" style="display:none">-->
+                                                            <!--                                                                <input class="form-control s_website_form_input o_donation_amount"-->
+                                                            <!--                                                                       type="text" name="bank_name"-->
+                                                            <!--                                                                       placeholder="Enter Bank Name"/>-->
+                                                            <!--                                                            </div>-->
+                                                        </div>
+                                                        <div class="row">
+                                                            <a role="button" href="#"
+                                                               class="btn btn-link p-0 mt-3"
+                                                               data-bs-target="#add_account_popup"
+                                                               data-bs-toggle="modal">
+                                                                <i class="fa fa-pencil"></i>
+                                                                Add new bank account
+                                                            </a>
+                                                        </div>
+                                                        <div class="row">
+                                                            <button href="#" type="submit"
+                                                                    class="withdraw_btn donation_donate_btn btn btn-secondary btn-lg mb-2 o_default_snippet_text">
+                                                                Withdraw
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                    <!-- popup code -->
+                                                    <div class="modal fade css_editable_mode_hidden"
+                                                         id="add_account_popup"
+                                                         aria-hidden="true" tabindex="-1">
+                                                        <div class="modal-dialog modal-lg pt-5">
+                                                            <form method="post" action="/add_new_bank_account">
+                                                                <div class="modal-content mt-5">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="o_payment_demo_modal_label">
+                                                                                Add a Bank Account
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div>
+                                                                                <div class="row gap2 gap-md-0">
+                                                                                    <div class="col-6 col-md mt-0 mb-0">
+                                                                                        <label for="customer_input"
+                                                                                               class="mt-0">
+                                                                                            <small>Select Bank</small>
+                                                                                        </label>
+                                                                                        <select class="form-control s_website_form_input o_bank_input"
+                                                                                                name="bank_id"
+                                                                                                id="bank_id"
+                                                                                                required="required">
+                                                                                            <t t-foreach="bank_ids"
+                                                                                               t-as="bank_id"
+                                                                                               t-key="bank_id.id">
+                                                                                                <option t-attf-value="{{ bank_id.id }}">
+                                                                                                    <span t-field="bank_id.name"/>
+                                                                                                </option>
+
+                                                                                            </t>
+                                                                                            <option value="other_bank">
+                                                                                                    <span>
+                                                                                                        Other Bank
+                                                                                                    </span>
+                                                                                                </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row gap2 gap-md-0 o_bank_name" id="o_bank_name" style="display:none">
+                                                                                    <div class="col-6 col-md mt-0 mb-0">
+                                                                                        <label for="bank_name"
+                                                                                               class="mt-0">
+                                                                                            <small>Bank Name</small>
+                                                                                        </label>
+                                                                                        <input class="form-control s_website_form_input "
+                                                                                               id="o_bank_input"
+                                                                                               type="text"
+                                                                                               name="bank_name"
+                                                                                               placeholder="Enter Bank Name"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row gap2 gap-md-0">
+                                                                                    <div class="col-6 col-md mt-0 mb-0">
+                                                                                        <label for="customer_input"
+                                                                                               class="mt-0">
+                                                                                            <small>Acc Number</small>
+                                                                                        </label>
+                                                                                        <input class="form-control s_website_form_input"
+                                                                                               type="text"
+                                                                                               name="acc_number"
+                                                                                               placeholder="Enter Acc Number"
+                                                                                               required=""/>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row gap2 gap-md-0">
+                                                                                    <div class="col-6 col-md mt-0 mb-0">
+                                                                                        <label for="customer_input"
+                                                                                               class="mt-0">
+                                                                                            <small>IFSC Code</small>
+                                                                                        </label>
+                                                                                        <input class="form-control s_website_form_input"
+                                                                                               type="text"
+                                                                                               name="ifsc_code"
+                                                                                               placeholder="Enter IFSC Code"
+                                                                                               required=""/>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="float-end mt-2"
+                                                                                 data-provider-id="6">
+
+                                                                                <button name="o_payment_submit_button"
+                                                                                        type="submit"
+                                                                                        class="btn btn-primary w-100 w-md-auto ms-auto px-5">
+                                                                                    Add Account
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end -->
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 pt16 pb16 d-none d-md-block o_colored_level">
+                                                <img src="/web_editor/shape/website_payment/s_donation_gift.svg?c1=%2349CB10"
+                                                     class="img img-fluid mx-auto" style="width: 75%;" alt=""
+                                                     loading="lazy"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+
+                            </div>
+                            <div class="d-none d-lg-flex justify-content-end col-lg-4">
+                                <t t-call="portal.side_content"/>
+                            </div>
+                            <div class="offcanvas offcanvas-start d-lg-none" id="accountOffCanvas">
+                                <t t-call="portal.side_content">
+                                    <t t-set="isOffcanvas" t-value="true"/>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center m-30">
+                            <div class="table-responsive border-0 ">
+                                <table class="o_list_table position-relative table table-sm o_list_table_ungrouped table-striped o_portal_my_doc_table mb-0">
+                                    <thead>
+                                        <tr class="active">
+                                            <th class="text-start">Ref#</th>
+                                            <th class="text-start">Date</th>
+                                            <th class="text-end">Bank Name</th>
+                                            <th class="text-end">Account</th>
+                                            <th class="text-end">Amount</th>
+                                            <th class="text-end">Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="transcation_history_ids" t-as="transcation_history_id"
+                                           t-key="transcation_history_id.id">
+                                            <tr>
+                                                <td class="text-start">
+                                                    <span>
+                                                        <t t-esc="transcation_history_id.name"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-start">
+                                                    <span>
+                                                        <t t-esc="transcation_history_id.date"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span>
+                                                        <t t-esc="transcation_history_id.account_id.bank_id.name"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span>
+                                                        <t t-esc="transcation_history_id.account_id.acc_number"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span>
+                                                        <t t-esc="transcation_history_id.amount"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span>
+                                                        <t t-esc="transcation_history_id.state"/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+
+                                        </t>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <t t-out="0"/>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -44,15 +44,20 @@ Long description of module's purpose
         'views/thank_you_order_confirm.xml',
         'views/thank_you_delivered_order.xml',
         'views/language.xml',
-
+        'views/res_partner_view.xml',
+        'views/create_payment_popup_view.xml',
+        'views/portal_layout.xml',
+        'views/transcation_history_view.xml',
+        'views/website_template.xml',
         'views/menu.xml'
 
     ],
     'assets': {
         'web.assets_frontend': [
-            'transporter/static/src/js/transport.js',
-            'transporter/static/src/js/transport_website_root.js',
+            # 'transporter/static/src/js/transport.js',
+            # 'transporter/static/src/js/transport_website_root.js',
             'transporter/static/src/css/style.css',
+            'transporter/static/src/js/s_website_form.js',
         ],
     }
 }

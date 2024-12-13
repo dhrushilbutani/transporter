@@ -1,0 +1,58 @@
+<odoo>
+    <record id="create_payment_popup" model="ir.ui.view">
+        <field name="name">Create Payment</field>
+        <field name="model">create.payment.popup</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="1" force_save="1"/>
+                            <field name="max_amount" readonly="1" force_save="1"/>
+                            <field name="amount" required="1"/>
+                            <field name="account_id" required="1" />
+                            <field name="remark" />
+                            <!--field name="line_ids">
+                                <tree>
+                                    <field name="transport_id" force_save="1"/>
+                                    <field name="name" force_save="1"/>
+                                </tree>
+                            </field-->
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+
+                    <button name="process_payment" string="Process Payment" type="object"
+                            class="btn btn-sm btn-primary"/>
+                    <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="create_multi_payment_popup" model="ir.ui.view">
+        <field name="name">Create Multi Payment</field>
+        <field name="model">create.multi.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="line_ids">
+                        <tree edit="0" delete="0" create="0">
+                            <field name="transaction_id" force_save="1"/>
+                            <field name="name" force_save="1"/>
+                            <field name="partner_id" force_save="1"/>
+                            <field name="account_id" force_save="1"/>
+                            <field name="amount" force_save="1"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="process_multi_payment" string="Process Payment" type="object"
+                            class="btn btn-sm btn-primary"/>
+                    <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

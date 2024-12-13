@@ -1,9 +1,10 @@
 <odoo>
-    <menuitem id="vehicle_root" name="Vehicle"/>
+    <menuitem id="vehicle_root" name="Transpoter"/>
 
-    <menuitem id="vehicle_menu" parent="vehicle_root" name="Vehicle" action="transport_vehicle_action"/>
+    <menuitem id="vehicle_menu" parent="vehicle_root" name="Vechile" action="transport_vehicle_action"/>
 
     <menuitem id="configration_root" name="Configration" parent="vehicle_root"/>
     <menuitem id="vehicle_category_menu" parent="configration_root" name="Category" action="transport_category_action"/>
     <menuitem id="vehicle_subcategory_menu" parent="configration_root" name="Sub Category" action="transport_subcategory_action"/>
+    <menuitem id="transcation_menu" parent="vehicle_root" name="Transcation" action="transcation_history_action"/>
 </odoo>

@@ -6,6 +6,9 @@ import { WebsiteRoot } from "@website/js/content/website_root";
 
 
 WebsiteRoot.include({
+    events: Object.assign({}, WebsiteRoot.events || {}, {
+        'change .o_bank_input': '_onChangeBank',
+    }),
     custom_events: Object.assign({}, WebsiteRoot.custom_events, {
         'gmap_api_request_market_place': '_onGMapAPIRequestMarketPlace',
         'gmap_api_request' : '_loadGMapAPI',
@@ -16,6 +19,20 @@ WebsiteRoot.include({
         this._super(...arguments);
         this.rpc = this.bindService("rpc");
         this.orm = this.bindService("orm");
+    },
+    _onChangeBank(ev){
+        const bank = ev.target.value;
+        const bank_input = document.getElementById('o_bank_name');
+        const bank_input_field = document.getElementById('o_bank_input');
+        if(bank === 'other_bank'){
+            bank_input.style.display = 'block';
+            bank_input_field.required = "required";
+        }
+        else{
+            bank_input.style.display = 'none';
+            bank_input_field.removeAttribute("required");
+        }
+
     },
     async _loadGMapAPI(editableMode, refetch) {
 
@@ -225,7 +242,7 @@ WebsiteRoot.include({
                 window.googleTranslateElementInit = (async function googleTranslateElementInit() {
                        new google.translate.TranslateElement(
                 {pageLanguage: 'en',
-//                includedLanguages: "zh-CN,en,ja,ko"
+                includedLanguages: "en,hi,kn,ta,mr"
                 },
                 'google_translate_element'
             );

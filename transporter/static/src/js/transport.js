@@ -24,6 +24,8 @@ publicWidget.registry.WebsiteDirection = publicWidget.Widget.extend({
     selector: '.o_market_place_form',
     events: {
         'click .o_payment_submit_transporter': '_onClickPaymentButton',
+        'click button.o_direction_button' : '_onClickGetDirection',
+        'input input[id="customer_input"]': '_onChangeCustomerInput',
     },
     init() {
         this._super(...arguments);
@@ -99,21 +101,28 @@ publicWidget.registry.WebsiteDirection = publicWidget.Widget.extend({
         ev.preventDefault();
 
     },
+    _onChangeCustomerInput: function(ev){
+            const customer_input = ev.target.value;
+            if(customer_input === null || customer_input === undefined){
+                document.getElementById("price_table").style.display = "none";
+            }
+            else{
+            document.getElementById("user_amount").innerHTML = parseFloat(customer_input) || 0.00;
+            document.getElementById("total_amount").innerHTML = (parseFloat(customer_input) || 0.00) + 50.00;
+            document.getElementById("price_table").style.display = "block";
+            }
+
+
+    },
+
+    _onClickGetDirection: function(ev){
+            const lat = ev.target.dataset.lat;
+            const lng = ev.target.dataset.lng;
+            window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`);
+            ev.preventDefault();
+    }
 });
 
-publicWidget.registry.ShareLiveLocation = publicWidget.Widget.extend({
-    selector: '.o_share_live_location',
-    events: {
-//        'click button.o_assign_vechile_share_location': '_onClickShareLiveLocation',
-    },
-    start: async function () {
-        console.log(">>>>>>>ShareLiveLocation");
-        this.rpc = this.bindService("rpc");
-    },
-
-
-
-});
 
 
 
@@ -131,17 +140,17 @@ publicWidget.registry.LanguageSelector = publicWidget.Widget.extend({
         });
 
     },
-
-
-//    window.googleTranslateElementInit = (async function googleTranslateElementInit() {
-//               console.log(">>>>>>>googleTranslateElementInit");
-//            await new google.translate.TranslateElement(
-//                {pageLanguage: 'en'},
-//                'google_translate_element'
-//            );
-//
-//    }).bind(this);
 });
+
+//publicWidget.registry.Withdraw = publicWidget.Widget.extend({
+//    selector: '.s_widharaw_form',
+//    events: {
+//        'change .o_donation_amount': '_onChangeDonationAmount',
+//    },
+//    _onChangeDonationAmount: function(ev){
+//
+//    }
+//});
 
 export default publicWidget.registry.Transporter;
 export default publicWidget.registry.WebsiteDirection;

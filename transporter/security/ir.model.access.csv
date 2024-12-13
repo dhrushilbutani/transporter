@@ -5,3 +5,11 @@ access_transport_category,transport_category,model_transport_category,,1,1,1,1
 access_transport_subcategory,transport_subcategory,model_transport_subcategory,,1,1,1,1
 
 access_transport_vehicle,transport_vehicle,model_transport_vehicle,,1,1,1,1
+
+access_create_payment_popup,create_payment_popup,model_create_payment_popup,,1,1,1,1
+
+access_transaction_history,transaction_history,model_transaction_history,,1,1,1,1
+
+access_create_multi_payment,create_multi_payment,model_create_multi_payment,,1,1,1,1
+
+access_create_multi_payment_line,create_multi_payment_line,model_create_multi_payment_line,,1,1,1,1

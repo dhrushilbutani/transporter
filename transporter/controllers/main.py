@@ -4,6 +4,7 @@ from datetime import datetime
 import base64
 
 
+
 class TransportWebsite(http.Controller):
 
     @http.route('/',type='http',auth='public',methods=["GET","POST"], csrf=False, website=True)
@@ -84,6 +85,12 @@ class TransportWebsite(http.Controller):
         data['transporter_user_ids'] = transporter_user_ids
         if sale_order.delivery_status == 'done' and sale_order.invoice_status == 'to invoice' and sale_order.user_id == request.env.user:
             data['create_payment'] = True
+        if sale_order.delivery_status == 'done' and sale_order.invoice_status == 'to invoice' and sale_order.user_id == request.env.user:
+            data['create_payment'] = True
+        data['object'] = sale_order
+        if sale_order.delivery_status == 'in_progress' and sale_order.transporter_user_id == request.env.user:
+            data['delivered_and_invoice_button'] = True
+
         print(data)
         return request.render("transporter.edit_order",data)
 
@@ -190,7 +197,13 @@ class TransportWebsite(http.Controller):
                                                              '|',
                                                              ('transporter_user_id','=',request.env.user.id),
                                                             ('user_id','=',request.env.user.id)])
-        data = {"sale_order_ids": sale_order_ids}
+        row_range = len(sale_order_ids)/3
+        if row_range == int(row_range):
+            row_range = int(row_range)
+        else:
+            row_range = int(row_range)+1
+
+        data = {"sale_order_ids": sale_order_ids, "row_range" : row_range, "total" : len(sale_order_ids)}
         print(data)
         return request.render("transporter.market_place_page", data)
 
@@ -209,16 +222,33 @@ class TransportWebsite(http.Controller):
         data['object'] = sale_order
         if sale_order.delivery_status == 'in_progress' and sale_order.transporter_user_id == request.env.user:
             data['delivered_and_invoice_button'] = True
+
+        data[
+            'assign_vechile_button'] = True if sale_order.transporter_user_id == request.env.user and not sale_order.vehicle_id else False
+        if data.get('assign_vechile_button'):
+            vechile_ids = request.env['transport.vehicle'].search([('create_uid', '=', request.env.user.id)])
+            data['vechile_ids'] = vechile_ids
         print(data)
         return request.render("transporter.view_market_place_order", data)
 
     @http.route("/transporter/confirm_order", type='http', auth='user', website=True, csrf=False)
     def confirm_order(self,**kwargs):
-        sale_order_id = request.env['sale.order'].browse(int(kwargs.get('sale_order_id')))
+
+        sale_order_id = request.env['sale.order'].sudo().browse(int(kwargs.get('sale_order_id')))
         price = float(kwargs.get('customer_input'))
         transporter_user_id = int(kwargs.get('transporter_user_id'))
         sale_order_id.order_line[0].sudo().write({'price_unit' : price})
         sale_order_id.sudo().write({'transporter_user_id' : transporter_user_id})
+        commision_product_id=request.env.ref("transporter.product_product_commision")
+        order_line_data = {
+            "product_id" :commision_product_id.id,
+            "price_unit" : 50,
+            "order_id" : sale_order_id.id,
+            "name" : commision_product_id.name,
+            "product_uom_qty" : 1.0
+        }
+        order_line_id = request.env['sale.order.line'].sudo().create(order_line_data)
+        order_line_id.sudo()._compute_amount()
         sale_order_id.sudo().action_confirm()
         return request.render("transporter.thank_you_order_confirm")
 

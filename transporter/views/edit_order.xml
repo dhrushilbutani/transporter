@@ -28,7 +28,7 @@
                     </div>
                     <section class="pt16 pb16 o_colored_level"
                              data-snippet="s_website_form" data-name="Form" style="background-image: none;">
-                        <div class="container">
+                        <div class="container o_market_place_form">
                             <t t-if="sale_order_id.delivery_status == 'in_progress'">
                                 <div class="o_share_live_location"/>
                             </t>
@@ -234,24 +234,48 @@
 
                                 </div>
                             </form>
-<!--                            <t t-if="create_payment">-->
-<!--                                        <div class="mb-0 py-2 col-12 s_website_form_submit">-->
-<!--                                            <div style="width: 200px;" class="s_website_form_label"/>-->
-<!--                                            <a href="#" role="button"-->
-<!--                                               class="btn btn-primary s_website_form_send o_default_snippet_text o_payment_submit_transporter"-->
-<!--                                             t-attf-data-sale-order-id="{{ sale_order_id.id }}">-->
-<!--                                                Create Patyment-->
-<!--                                            </a>-->
-<!--                                            <span id="s_website_form_result"/>-->
-<!--                                        </div>-->
-<!--                                    </t>-->
+                            <t t-if="delivered_and_invoice_button">
+                                <div class="mb-0 py-2 col-12 s_website_form_submit">
+                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                    <a t-attf-href="/delivered_order/{{ sale_order_id.id }}" role="button"
+                                       class="btn btn-primary s_website_form_send o_default_snippet_text">
+                                        Delivered
+                                    </a>
+                                    <span id="s_website_form_result"/>
+                                </div>
+                            </t>
+
+                            <t t-if="create_payment">
+                                <div class="mb-0 py-2 col-12 s_website_form_submit">
+                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                    <a name="o_payment_submit_transporter o_payment_submit_transporter" role="button"
+                                       class="btn btn-primary s_website_form_send o_default_snippet_text o_payment_submit_transporter"
+                                       t-attf-data-sale-order-id="{{ sale_order_id.id }}">
+                                        Create Patyment
+                                    </a>
+                                    <span id="s_website_form_result"/>
+                                </div>
+                            </t>
+
+
+                            <!--                            <t t-if="create_payment">-->
+                            <!--                                        <div class="mb-0 py-2 col-12 s_website_form_submit">-->
+                            <!--                                            <div style="width: 200px;" class="s_website_form_label"/>-->
+                            <!--                                            <a href="#" role="button"-->
+                            <!--                                               class="btn btn-primary s_website_form_send o_default_snippet_text o_payment_submit_transporter"-->
+                            <!--                                             t-attf-data-sale-order-id="{{ sale_order_id.id }}">-->
+                            <!--                                                Create Patyment-->
+                            <!--                                            </a>-->
+                            <!--                                            <span id="s_website_form_result"/>-->
+                            <!--                                        </div>-->
+                            <!--                                    </t>-->
                             <div class="modal fade css_editable_mode_hidden" id="opne_price_popup"
                                  aria-hidden="true" tabindex="-1">
                                 <div class="modal-dialog modal-lg pt-5">
                                     <form method="post" action="/transporter/confirm_order/">
                                         <div class="modal-content mt-5">
                                             <div class="modal-content">
-                                                <input type="hidden" name="sale_order_id"
+                                                <input type="text" name="sale_order_id"
                                                        t-attf-value="{{ sale_order_id.id }}"/>
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="o_payment_demo_modal_label">
@@ -287,6 +311,35 @@
                                                                        required="required"
                                                                        placeholder="350"/>
                                                             </div>
+                                                        </div>
+                                                        <div class="table m-3" id="price_table" style="display: none">
+                                                            <table>
+                                                                <tr class="m-1">
+                                                                    <td class="text-start">
+                                                                        <b>Your Amount :</b>
+                                                                    </td>
+                                                                    <td class="text-end">
+                                                                        <span id="user_amount"></span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="m-1">
+                                                                    <td class="text-start">
+                                                                        <b>Commision :</b>
+                                                                    </td>
+                                                                    <td class="text-end">
+                                                                        <span id="commision">50.00</span>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr class="m-1">
+                                                                    <td class="text-start">
+                                                                        <b>Total Amount :</b>
+                                                                    </td>
+                                                                    <td class="text-end" style="font-size: 20px">
+                                                                        <span id="total_amount"></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                     <div class="float-end mt-2" data-provider-id="6">
@@ -342,7 +395,8 @@
                                                     <div class="float-end mt-2" data-provider-id="6">
 
                                                         <button name="o_payment_submit_button" type="submit"
-                                                                class="btn btn-primary w-100 w-md-auto ms-auto px-5 o_assign_vechile_share_location" t-attf-data-sale-order-id="{{ sale_order_id.id }}">
+                                                                class="btn btn-primary w-100 w-md-auto ms-auto px-5 o_assign_vechile_share_location"
+                                                                t-attf-data-sale-order-id="{{ sale_order_id.id }}">
                                                             Confirm Vechile And Share Live Location
                                                         </button>
                                                     </div>

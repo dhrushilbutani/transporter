@@ -26,7 +26,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container pt-3">
+                    <!--div class="container pt-3"-->
+                    <div class="pt-3" style="background: white; padding:0px 3rem;">
 
                         <div class="table-responsive border-0 ">
                             <table class="o_list_table position-relative table table-sm o_list_table_ungrouped table-striped o_portal_my_doc_table mb-0">

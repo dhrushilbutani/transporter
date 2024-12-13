@@ -1,0 +1,69 @@
+<odoo>
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="name">Res Parnter: Form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='contact_addresses']" position="replace">
+                <page string="Transport Details">
+                    <group>
+                        <group string="Order History">
+                            <field name="total_order"/>
+                            <field name="order_commision"/>
+                            <field name="total_order_amount_with_commision"/>
+                            <button icon="fa-arrow-right" string="Order" name="view_order_history" type="object"
+                                    class="btn btn-link p-0"/>
+
+                        </group>
+                        <group string="Earning">
+                            <field name="total_earnings"/>
+                            <field name="earning_commission"/>
+                            <field name="total_withdrawal"/>
+                            <field name="remaning"/>
+                            <button icon="fa-arrow-right" string="Earning" name="view_earning_history" type="object"
+                                    class="btn btn-link p-0"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="transcation_history_ids" readonly="1">
+                            <tree>
+                                <field name="date"/>
+                                <field name="account_id"/>
+                                <field name="amount"/>
+                                <field name="remark"/>
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="date"/>
+                                        <field name="account_id"/>
+                                        <field name="amount"/>
+                                        <field name="remark"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="create_payment" type="object" string="Create Payment" class="oe_highlight"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_partner_bank_form" model="ir.ui.view">
+        <field name="name">Res Partner Bank: Account</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bank_id']" position="after">
+                <field name="ifsc_code"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

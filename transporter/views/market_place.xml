@@ -27,78 +27,122 @@
                         </div>
                     </div>
                     <div class="container pt-3">
+                        <div class="row">
+                            <t t-foreach="sale_order_ids" t-as="sale_order_id" t-key="sale_order_id.id">
 
-                        <div class="table-responsive border-0 ">
-                            <table class="o_list_table position-relative table table-sm o_list_table_ungrouped table-striped o_portal_my_doc_table mb-0">
-                                <thead>
-                                    <tr class="active">
-                                        <th>
-                                            <span class="d-none d-md-inline">Order #</span>
-                                        </th>
-                                        <th class="text-end">Order Date</th>
-                                        <th class="text-end">Schedule Date</th>
-                                        <th class="text-end">Pickup Location</th>
-                                        <th class="text-end">Destination Location</th>
-                                        <th class="text-end">Status</th>
-                                        <th class="text-end">Delivery Status</th>
-                                        <th class="text-end">Invoice Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <t t-foreach="sale_order_ids" t-as="sale_order_id" t-key="sale_order_id.id">
-                                        <tr>
+                                <div class="col-sm mb-2">
+                                    <a  t-attf-href="/view_market_place_order/{{ sale_order_id.id }}">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <t t-esc="sale_order_id.name"/>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">
 
-                                            <td class="text-start">
-                                                <span>
-                                                    <a t-attf-href="/view_market_place_order/{{ sale_order_id.id }}">
-                                                        <t t-esc="sale_order_id.name"/>
-                                                    </a>
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <span>
-                                                    <t t-esc="sale_order_id.date_order"/>
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <span>
-                                                    <t t-esc="sale_order_id.schedule_date"/>
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <span>
-                                                    <t t-esc="sale_order_id.location_id"/>
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <span>
-                                                    <t t-esc="sale_order_id.location_dest_id"/>
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <span>
-                                                    <t t-esc="sale_order_id.state"/>
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <span>
-                                                    <t t-esc="sale_order_id.delivery_status"/>
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <span>
-                                                    <t t-esc="sale_order_id.invoice_status"/>
-                                                </span>
-                                            </td>
-                                        </tr>
+                                                <t t-esc="sale_order_id.schedule_date"/>
+                                            </h6>
+                                            <p class="card-text">
+                                                <b>From:</b>
+                                                <br/>
+                                                <t t-esc="sale_order_id.location_id"/>
+                                                <br/>
+                                                <b>To:</b>
+                                                <br/>
+                                                <t t-esc="sale_order_id.location_dest_id"/>
+                                                <br/>
+                                                <br/>
+                                                <b>Status :</b>
+                                                <t t-esc="sale_order_id.state"/>
+                                                <br/>
+                                                <b>Delivery Status :</b>
+                                                <t t-esc="sale_order_id.delivery_status"/>
+                                                <br/>
+                                                <b>Invoice Status :</b>
+                                                <t t-esc="sale_order_id.invoice_status"/>
+                                                <br/>
+
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
 
 
-                                    </t>
-
-                                </tbody>
-                            </table>
+                            </t>
                         </div>
+
+                        <!--                        <div class="table-responsive border-0 ">-->
+                        <!--                            <table class="o_list_table position-relative table table-sm o_list_table_ungrouped table-striped o_portal_my_doc_table mb-0">-->
+                        <!--                                <thead>-->
+                        <!--                                    <tr class="active">-->
+                        <!--                                        <th>-->
+                        <!--                                            <span class="d-none d-md-inline">Order #</span>-->
+                        <!--                                        </th>-->
+                        <!--                                        <th class="text-end">Order Date</th>-->
+                        <!--                                        <th class="text-end">Schedule Date</th>-->
+                        <!--                                        <th class="text-end">Pickup Location</th>-->
+                        <!--                                        <th class="text-end">Destination Location</th>-->
+                        <!--                                        <th class="text-end">Status</th>-->
+                        <!--                                        <th class="text-end">Delivery Status</th>-->
+                        <!--                                        <th class="text-end">Invoice Status</th>-->
+                        <!--                                        <th></th>-->
+                        <!--                                    </tr>-->
+                        <!--                                </thead>-->
+                        <!--                                <tbody>-->
+                        <!--                                    <t t-foreach="sale_order_ids" t-as="sale_order_id" t-key="sale_order_id.id">-->
+                        <!--                                        <tr>-->
+
+                        <!--                                            <td class="text-start">-->
+                        <!--                                                <span>-->
+                        <!--                                                    <a t-attf-href="/view_market_place_order/{{ sale_order_id.id }}">-->
+                        <!--                                                        <t t-esc="sale_order_id.name"/>-->
+                        <!--                                                    </a>-->
+                        <!--                                                </span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td class="text-end">-->
+                        <!--                                                <span>-->
+                        <!--                                                    <t t-esc="sale_order_id.date_order"/>-->
+                        <!--                                                </span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td class="text-end">-->
+                        <!--                                                <span>-->
+                        <!--                                                    <t t-esc="sale_order_id.schedule_date"/>-->
+                        <!--                                                </span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td class="text-end">-->
+                        <!--                                                <span>-->
+                        <!--                                                    <t t-esc="sale_order_id.location_id"/>-->
+                        <!--                                                </span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td class="text-end">-->
+                        <!--                                                <span>-->
+                        <!--                                                    <t t-esc="sale_order_id.location_dest_id"/>-->
+                        <!--                                                </span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td class="text-end">-->
+                        <!--                                                <span>-->
+                        <!--                                                    <t t-esc="sale_order_id.state"/>-->
+                        <!--                                                </span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td class="text-end">-->
+                        <!--                                                <span>-->
+                        <!--                                                    <t t-esc="sale_order_id.delivery_status"/>-->
+                        <!--                                                </span>-->
+                        <!--                                            </td>-->
+                        <!--                                            <td class="text-end">-->
+                        <!--                                                <span>-->
+                        <!--                                                    <t t-esc="sale_order_id.invoice_status"/>-->
+                        <!--                                                </span>-->
+                        <!--                                            </td>-->
+                        <!--                                        </tr>-->
+
+
+                        <!--                                    </t>-->
+
+                        <!--                                </tbody>-->
+                        <!--                            </table>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
             </t>

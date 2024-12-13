@@ -1,10 +1,38 @@
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="menu_order" model="website.menu">
             <field name="name">Order</field>
             <field name="url">/view_order</field>
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence" type="int">20</field>
+        </record>
+
+        <record id="product_product_commision" model="product.product">
+            <field name="name">Commision</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="standard_price">0.0</field>
+            <field name="list_price">0.0</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="product_product_delivery_payment" model="product.product">
+            <field name="name">Delivery Payment</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="standard_price">0.0</field>
+            <field name="list_price">0.0</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="transcation_history_sequence" model="ir.sequence">
+            <field name="name">Transcation Request</field>
+            <field name="code">transcation.request</field>
+            <field name="prefix">TR</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
         </record>
     </data>
 </odoo>

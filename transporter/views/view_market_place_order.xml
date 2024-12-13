@@ -32,8 +32,21 @@
                             <t t-if="sale_order_id.delivery_status == 'in_progress'">
                                 <div class="o_share_live_location"/>
                             </t>
+
                             <form action="/transporter/confirm_order" method="post">
                                 <div id="googleMapDirection" class="mb-3" style="width:100%;height:250px;"></div>
+                                <div class="m-3">
+                                    <div class="btn-group" role="group"
+                                         aria-label="Basic outlined example">
+                                        <button type="button" class="btn btn-lg btn-outline-primary o_direction_button"
+                                                t-attf-data-lat="{{ sale_order_id.location_dest_lat }}"
+                                                t-attf-data-lng="{{ sale_order_id.location_dest_lng }}">
+                                            <i class="fa fa-directions"></i>
+                                            Get Directions
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div class="s_website_form_rows row s_col_no_bgcolor">
                                     <input type="hidden" id="sale_order_id" name="sale_order_id"
                                            t-attf-value="{{ sale_order_id.id }}"/>
@@ -226,7 +239,37 @@
                                                                                placeholder="350"/>
                                                                     </div>
                                                                 </div>
+                                                                <div class="table m-3" id="price_table" style="display: none">
+                                                                    <table>
+                                                                    <tr class="m-1">
+                                                                        <td class="text-start">
+                                                                            <b>Your Amount :</b>
+                                                                        </td>
+                                                                        <td class="text-end">
+                                                                            <span id="user_amount"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="m-1">
+                                                                        <td class="text-start">
+                                                                            <b>Commision :</b>
+                                                                        </td>
+                                                                        <td class="text-end">
+                                                                            <span id="commision">50.00</span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr class="m-1">
+                                                                        <td class="text-start">
+                                                                            <b>Total Amount :</b>
+                                                                        </td>
+                                                                        <td class="text-end" style="font-size: 20px">
+                                                                            <span id="total_amount"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </table>
+                                                                </div>
                                                             </div>
+
                                                             <div class="float-end mt-2" data-provider-id="6">
 
                                                                 <button name="o_payment_submit_button" type="submit"
@@ -257,15 +300,76 @@
                             <t t-if="create_payment">
                                 <div class="mb-0 py-2 col-12 s_website_form_submit">
                                     <div style="width: 200px;" class="s_website_form_label"/>
-                                    <a name="o_payment_submit_transporter o_payment_submit_transporter"  role="button"
+                                    <a name="o_payment_submit_transporter o_payment_submit_transporter" role="button"
                                        class="btn btn-primary s_website_form_send o_default_snippet_text o_payment_submit_transporter"
-                                    t-attf-data-sale-order-id="{{ sale_order_id.id }}">
+                                       t-attf-data-sale-order-id="{{ sale_order_id.id }}">
                                         Create Patyment
                                     </a>
                                     <span id="s_website_form_result"/>
                                 </div>
                             </t>
 
+                            <t t-if="assign_vechile_button">
+                                <div class="col-2">
+                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                    <a href="#" data-bs-target="#start_order_popup"
+                                       data-bs-toggle="modal"
+                                       role="button"
+                                       class="btn btn-primary s_website_form_send o_default_snippet_text .A">
+                                        Assign Vechile
+                                    </a>
+                                </div>
+                            </t>
+                            <div class="modal fade css_editable_mode_hidden" id="start_order_popup"
+                                 aria-hidden="true" tabindex="-1">
+                                <div class="modal-dialog modal-lg pt-5">
+                                    <form method="post" t-attf-action="/confirm_vechile/{{ sale_order_id.id }}">
+                                        <div class="modal-content mt-5">
+                                            <div class="modal-content .confirm_vechile_and_share_location">
+                                                <input type="hidden" name="sale_order_id"
+                                                       t-attf-value="{{ sale_order_id.id }}"/>
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="o_payment_demo_modal_label">
+                                                        Add Your Vechile
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <div class="row gap2 gap-md-0">
+                                                            <div class="col-6 col-md mt-0 mb-0">
+                                                                <label for="customer_input" class="mt-0">
+                                                                    <small>Select Vechile</small>
+                                                                </label>
+                                                                <select class="form-control s_website_form_input"
+                                                                        name="vechile_id"
+                                                                        id="vechile_id" required="required">
+                                                                    <t t-foreach="vechile_ids"
+                                                                       t-as="vechile_id"
+                                                                       t-key="vechile_id.id">
+                                                                        <option t-attf-value="{{ vechile_id.id }}">
+                                                                            <span t-field="vechile_id.code"/>
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="float-end mt-2" data-provider-id="6">
+
+                                                        <button name="o_payment_submit_button" type="submit"
+                                                                class="btn btn-primary w-100 w-md-auto ms-auto px-5 o_assign_vechile_share_location"
+                                                                t-attf-data-sale-order-id="{{ sale_order_id.id }}">
+                                                            Confirm Vechile And Share Live Location
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div id="sale_order_communication">
                                 <h3>Communication history</h3>
                                 <t t-call="portal.message_thread"/>

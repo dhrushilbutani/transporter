@@ -1,0 +1,88 @@
+<odoo>
+    <record id="transcation_history_form_view" model="ir.ui.view">
+        <field name="name">Transcation History: Form</field>
+        <field name="model">transaction.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <!--                    <button name="approve_vehicle" type="object" string="Approve" class="oe_highlight" invisible="state=='approve'"/>-->
+                    <!--                    <button name="reset_to_draft" type="object" string="Reset To Draft" invisible="state=='draft'"/>-->
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="amount"/>
+                            <field name="date"/>
+
+                        </group>
+                        <group string="Bank Details">
+                            <field name="account_id"/>
+                            <field name="razorpay_id"/>
+                            <field name="remark"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="transcation_history_tree_view" model="ir.ui.view">
+        <field name="name">Transcation History: Tree</field>
+        <field name="model">transaction.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="account_id"/>
+                <field name="amount"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="transcation_history_search_view" model="ir.ui.view">
+        <field name="name">Transcation History: Search</field>
+        <field name="model">transaction.history</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="razorpay_id"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="account_id"/>
+                <field name="state"/>
+                <filter string="Draft" name="draft_transcation" domain="[('state','=','draft')]"/>
+                <filter string="Approved" name="approve_transcation" domain="[('state','=','approve')]"/>
+                <filter string="Reject" name="reject_transcation" domain="[('state','=','reject')]"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="transcation_history_action" model="ir.actions.act_window">
+        <field name="name">Transcation</field>
+        <field name="res_model">transaction.history</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_draft_transcation' : 1}</field>
+    </record>
+
+    <record id="server_action_open_multi_payment_popup" model="ir.actions.server">
+       <field name="name">Create Multi Payment</field>
+       <field name="model_id" ref="transporter.model_transaction_history"/>
+       <field name="binding_model_id" ref="transporter.model_transaction_history"/>
+       <field name="binding_view_types">list</field>
+       <field name="state">code</field>
+       <field name="code">
+           action = model.action_open_multi_payment()
+       </field>
+    </record>
+
+</odoo>
