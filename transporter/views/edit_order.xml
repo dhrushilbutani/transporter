@@ -28,7 +28,7 @@
                     </div>
                     <section class="pt16 pb16 o_colored_level"
                              data-snippet="s_website_form" data-name="Form" style="background-image: none;">
-                        <div class="container o_market_place_form">
+                        <div class="container o_edit_order">
                             <t t-if="sale_order_id.delivery_status == 'in_progress'">
                                 <div class="o_share_live_location"/>
                             </t>
@@ -257,25 +257,13 @@
                                 </div>
                             </t>
 
-
-                            <!--                            <t t-if="create_payment">-->
-                            <!--                                        <div class="mb-0 py-2 col-12 s_website_form_submit">-->
-                            <!--                                            <div style="width: 200px;" class="s_website_form_label"/>-->
-                            <!--                                            <a href="#" role="button"-->
-                            <!--                                               class="btn btn-primary s_website_form_send o_default_snippet_text o_payment_submit_transporter"-->
-                            <!--                                             t-attf-data-sale-order-id="{{ sale_order_id.id }}">-->
-                            <!--                                                Create Patyment-->
-                            <!--                                            </a>-->
-                            <!--                                            <span id="s_website_form_result"/>-->
-                            <!--                                        </div>-->
-                            <!--                                    </t>-->
                             <div class="modal fade css_editable_mode_hidden" id="opne_price_popup"
                                  aria-hidden="true" tabindex="-1">
                                 <div class="modal-dialog modal-lg pt-5">
                                     <form method="post" action="/transporter/confirm_order/">
                                         <div class="modal-content mt-5">
                                             <div class="modal-content">
-                                                <input type="text" name="sale_order_id"
+                                                <input type="hidden" name="sale_order_id"
                                                        t-attf-value="{{ sale_order_id.id }}"/>
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="o_payment_demo_modal_label">

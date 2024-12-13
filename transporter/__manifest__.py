@@ -54,8 +54,8 @@ Long description of module's purpose
     ],
     'assets': {
         'web.assets_frontend': [
-            # 'transporter/static/src/js/transport.js',
-            # 'transporter/static/src/js/transport_website_root.js',
+            'transporter/static/src/js/transport.js',
+            'transporter/static/src/js/transport_website_root.js',
             'transporter/static/src/css/style.css',
             'transporter/static/src/js/s_website_form.js',
         ],

@@ -73,12 +73,15 @@ class TransportWebsite(http.Controller):
         if data.get('assign_vechile_button'):
             vechile_ids = request.env['transport.vehicle'].search([('create_uid','=',request.env.user.id)])
             data['vechile_ids'] = vechile_ids
+        transporter_user_ids = request.env['transport.vehicle'].sudo().search(
+            [('subcategory_id', '=', sale_order.subcategory_id.id)]).create_uid
+        data['transporter_user_ids'] = transporter_user_ids
         if sale_order.user_id == request.env.user:
             data['update_button'] = True
             data['cancel_button'] = True
         elif sale_order.transporter_user_id == request.env.user:
             data['cancel_button'] = True
-        if sale_order.state in ('draft','sent') and sale_order.create_uid == request.env.user:
+        if sale_order.state in ('draft','sent') and sale_order.user_id == request.env.user:
             data['set_amount_and_transporter'] = True
         transporter_user_ids = request.env['transport.vehicle'].sudo().search(
             [('subcategory_id', '=', sale_order.subcategory_id.id)]).create_uid
