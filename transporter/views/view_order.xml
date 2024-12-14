@@ -7,7 +7,8 @@
                         <div id="o_wblog_blog_top">
                             <div data-name="Cover" data-use_filters="True" data-use_text_align="True"
                                  data-res-model="blog.blog" data-res-id="3"
-                                 class="d-flex flex-column h-100 o_colored_level o_cc o_cc3   o_wblog_post_page_cover o_record_has_cover cover_auto" style="border-radius: 20px 20px 0px 0px;">
+                                 class=" d-flex flex-column h-100 o_colored_level o_cc o_cc3   o_wblog_post_page_cover o_record_has_cover cover_auto"
+                                 style="border-radius: 20px 20px 0px 0px;">
                                 <div class="o_record_cover_component o_record_cover_image "
                                      style="background-image: none;"></div>
                                 <div class="o_record_cover_component o_record_cover_filter oe_black"
@@ -15,7 +16,7 @@
                                 <div class="container position-relative h-100 d-flex flex-column justify-content-around">
                                     <div class="o_wblog_post_title  ">
                                         <span class="text-white text-decoration-none" title="Success Stories">
-                                            <div id="o_wblog_post_name" placeholder="Blog Title">Recent Orders
+                                            <div id="o_wblog_post_name" placeholder="Blog Title">Recent Order
                                             </div>
 
                                         </span>
@@ -26,123 +27,66 @@
                             </div>
                         </div>
                     </div>
-                    <!--div class="container pt-3"-->
                     <div class="pt-3" style="background: white; padding:0px 3rem;">
-<div class="edit_order">
-    <div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Date</th>
-                <th>Pickup City</th>
-                <th>Drop City</th>
-                <th>Delivery Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <t t-foreach="sale_order_ids" t-as="sale_order_id" t-key="sale_order_id.id">
-                <tr>
-                    <td>
-                        <a t-attf-href="/edit_order/{{ sale_order_id.id }}">
-                            <t t-esc="sale_order_id.name"/>
-                        </a>
-                    </td>
-                    <td><t t-esc="sale_order_id.date_order"/></td>
-                    <td><t t-esc="sale_order_id.location_id"/></td>
-                    <td><t t-esc="sale_order_id.location_dest_id"/></td>
-                    <td class="status delivered">
-                        <t t-if="sale_order_id.delivery_status == 'todo'">
-                            <span class="text-warning" t-field="sale_order_id.delivery_status"/>
-                        </t>
-                        <t t-if="sale_order_id.delivery_status == 'in_progress'">
-                            <span style="color: grey;" t-field="sale_order_id.delivery_status"/>
-                        </t>
-                        <t t-if="sale_order_id.delivery_status == 'done'">
-                            <span class="text-success" t-field="sale_order_id.delivery_status"/>
-                        </t>
-                        <t t-if="sale_order_id.delivery_status == 'cancel'">
-                            <span class="text-danger" t-field="sale_order_id.delivery_status"/>
-                        </t>
-                    </td>
-                </tr>
-            </t>
-        </tbody>
-    </table>
-</div>
-</div>
-<!--                        <div class="table-responsive border-0 ">-->
-<!--                            <table class="o_list_table position-relative table table-sm o_list_table_ungrouped table-striped o_portal_my_doc_table mb-0">-->
-<!--                                <thead>-->
-<!--                                    <tr class="active">-->
-<!--                                        <th>-->
-<!--                                            <span class="d-none d-md-inline">Order #</span>-->
-<!--                                        </th>-->
-<!--                                        <th class="text-end">Order Date</th>-->
-<!--                                        <th class="text-end">Schedule Date</th>-->
-<!--                                        <th class="text-end">Pickup Location</th>-->
-<!--                                        <th class="text-end">Destination Location</th>-->
-<!--                                        <th class="text-end">Status</th>-->
-<!--                                        <th class="text-end">Delivery Status</th>-->
-<!--                                        <th class="text-end">Invoice Status</th>-->
-<!--                                        <th></th>-->
-<!--                                    </tr>-->
-<!--                                </thead>-->
-<!--                                <tbody>-->
-<!--                                    <t t-foreach="sale_order_ids" t-as="sale_order_id" t-key="sale_order_id.id">-->
-<!--                                        <tr>-->
+                    <div class="edit_order table-responsive border-0 ">
+                        <div class="table-container" style="top:30px;position:sticky;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Pickup City</th>
+                                        <th>Drop City</th>
+                                        <th>Delivery Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-<!--                                            <td class="text-start">-->
-<!--                                                <span>-->
-<!--                                                    <a t-attf-href="/edit_order/{{ sale_order_id.id }}">-->
-<!--                                                        <t t-esc="sale_order_id.name"/>-->
-<!--                                                    </a>-->
-<!--                                                </span>-->
-<!--                                            </td>-->
-<!--                                            <td class="text-end">-->
-<!--                                                <span>-->
-<!--                                                    <t t-esc="sale_order_id.date_order"/>-->
-<!--                                                </span>-->
-<!--                                            </td>-->
-<!--                                            <td class="text-end">-->
-<!--                                                <span>-->
-<!--                                                    <t t-esc="sale_order_id.schedule_date"/>-->
-<!--                                                </span>-->
-<!--                                            </td>-->
-<!--                                            <td class="text-end">-->
-<!--                                                <span>-->
-<!--                                                    <t t-esc="sale_order_id.location_id"/>-->
-<!--                                                </span>-->
-<!--                                            </td>-->
-<!--                                            <td class="text-end">-->
-<!--                                                <span>-->
-<!--                                                    <t t-esc="sale_order_id.location_dest_id"/>-->
-<!--                                                </span>-->
-<!--                                            </td>-->
-<!--                                            <td class="text-end">-->
-<!--                                                <span>-->
-<!--                                                    <t t-esc="sale_order_id.state"/>-->
-<!--                                                </span>-->
-<!--                                            </td>-->
-<!--                                            <td class="text-end">-->
-<!--                                                <span>-->
-<!--                                                    <t t-esc="sale_order_id.delivery_status"/>-->
-<!--                                                </span>-->
-<!--                                            </td>-->
-<!--                                            <td class="text-end">-->
-<!--                                                <span>-->
-<!--                                                    <t t-esc="sale_order_id.invoice_status"/>-->
-<!--                                                </span>-->
-<!--                                            </td>-->
-<!--                                        </tr>-->
-
-
-<!--                                    </t>-->
-
-<!--                                </tbody>-->
-<!--                            </table>-->
-<!--                        </div>-->
+                                    <t t-foreach="sale_order_ids" t-as="sale_order_id" t-key="sale_order_id.id">
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <a t-attf-href="/edit_order/{{ sale_order_id.id }}">
+                                                        <t t-esc="sale_order_id.name"/>
+                                                    </a>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <t t-esc="sale_order_id.date_order"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="sale_order_id.location_city"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="sale_order_id.location_dest_city"/>
+                                            </td>
+                                            <td class="status delivered">
+                                                <t t-if="sale_order_id.delivery_status == 'todo'">
+                                                    <span class="text-warning"
+                                                          t-field="sale_order_id.delivery_status"/>
+                                                </t>
+                                                <t t-if="sale_order_id.delivery_status == 'in_progress'">
+                                                    <span style="color: grey;"
+                                                          t-field="sale_order_id.delivery_status"/>
+                                                </t>
+                                                <t t-if="sale_order_id.delivery_status == 'done'">
+                                                    <span class="text-success"
+                                                          t-field="sale_order_id.delivery_status"/>
+                                                </t>
+                                                <t t-if="sale_order_id.delivery_status == 'cancel'">
+                                                    <span class="text-danger"
+                                                          t-field="sale_order_id.delivery_status"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    </div>
+
+
                 </div>
             </t>
         </t>
