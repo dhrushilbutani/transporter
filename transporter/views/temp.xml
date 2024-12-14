@@ -1,0 +1,95 @@
+<t name="About Us" t-name="website.about-us">
+    <t t-call="website.layout">
+        <div id="wrap">
+            <div class="oe_structure">
+                <section class="s_title parallax s_parallax_is_fixed bg-black-50 pt24 pb24 mb32" data-vcss="001"
+                         data-snippet="s_title" data-scroll-background-ratio="1">
+                    <span class="s_parallax_bg oe_img_bg"
+                          style="background-image: url('/web/image/website.s_parallax_default_image'); background-position: 50% 0;"/>
+                    <div class="o_we_bg_filter bg-black-50"/>
+                    <div class="container">
+                        <h1>About us</h1>
+                    </div>
+                </section>
+            </div>
+            <div class="oe_structure">
+                <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 pt16 pb16">
+                                <h2 style="font-weight:800;color:#000000;font-size:50px;line-height:60px">Introduction</h2>
+                                <p style="color:#000000;font-size:20px;line-height:30px;font-weight:300;width:80%;margin-top:20px">At Kaizen, we’re on a mission to redefine logistics and supply
+                                    chain management for a rapidly evolving world. Our platform
+                                    empowers suppliers and transporters with cutting-edge
+                                    technology, ensuring smooth, transparent, and efficient
+                                    operations. By integrating real-time tracking, intelligent load
+                                    matching, and multilingual support, we’ve created an
+                                    ecosystem where logistics meet innovation.
+                                </p>
+                                <p style="color:#000000;font-size:20px;line-height:30px;font-weight:300;width:80%;margin-top:20px">
+                                    Driven by a commitment to excellence, we aim to bridge
+                                    gaps, reduce inefficiencies, and unlock new possibilities for
+                                    businesses everywhere. Join us as we transform the future
+                                    of logistics- One seamless delivery at a time.
+                                </p>
+
+                            </div>
+                            <div class="col-lg-6 pt16 pb16">
+                                <img src="/web/image/website.s_text_image_default_image" class="img img-fluid mx-auto"
+                                     alt="" loading="lazy"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="s_text_image pt32 pb32 mb32" data-snippet="s_image_text" style="border-radius:10px">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 pt16 pb16">
+                                <img src="/web/image/website.s_image_text_default_image" class="img img-fluid mx-auto"
+                                     alt="" loading="lazy"/>
+                            </div>
+                            <div class="col-lg-6 pt16 pb16">
+                                <h2 style="font-weight:800;color:#000000;font-size:50px;line-height:60px">Vision</h2>
+                                <p style="color:#000000;font-size:20px;line-height:30px;font-weight:300;width:80%;margin-top:20px">To revolutionize logistics by streamlining operations and
+                                    pushing the boundaries of transportation, efficiency and
+                                    innovation.
+                                </p>
+                                <h2 style="font-weight:800;color:#000000;font-size:50px;line-height:60px">Mission</h2>
+                                <p style="color:#000000;font-size:20px;line-height:30px;font-weight:300;width:80%;margin-top:20px">To create a comprehensive, technology-driven platform that
+                                    seamlessly connects suppliers and transporters, fostering
+                                    efficiency, reliability, and growth in the logistics ecosystem.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="s_title pt40 pb20" data-vcss="001" data-snippet="s_title" style="border-radius:10px">
+                    <div class="container s_allow_columns">
+                        <h1 class="" style="font-weight:800;color:#000000;font-size:50px;line-height:60px; text-align: center;">Meet The Founder</h1>
+                    </div>
+                </section>
+                <section class="s_company_team pt48 pb48" data-snippet="s_company_team" style="border-radius:10px">
+                    <div class="container">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <div class="col-lg-2"/>
+                            <div class="col-lg-2 pb16 o_not_editable" contenteditable="false">
+                                <img alt="" src="/web/image/website.s_company_team_image_1"
+                                     class="img-fluid rounded-circle mx-auto o_editable_media" loading="lazy"/>
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 style="font-weight:400;color:#000000;font-size:40px;line-height:60px">Sarang Kulkarni</h4>
+                                <p style="color:#000000;font-size:20px;line-height:30px;font-weight:300;width:80%;margin-top:20px">A visionary leader with a passion for redefining
+                                    logistics. Building a future where technology bridges
+                                    gaps, simplifies processes, and sets new standards for
+                                    efficiency and reliability.
+                                </p>
+                            </div>
+                            <div class="col-lg-2"/>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+</t>

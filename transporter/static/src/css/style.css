@@ -2,10 +2,10 @@ header .navbar-brand.logo img {
     object-fit: contain;
     display: block;
     width: auto;
-    height: 4rem;
+    height: 3rem;
 }
 .o_header_affixed.o_header_is_scrolled .navbar-brand img {
-    height: 4rem;
+    height: 3rem;
 }
 
 main {
@@ -15,3 +15,100 @@ main {
 section {
     background-color: white;
 }
+
+//market-place
+
+.container_market_place {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .card_market_place {
+            background-color: white; /* Adds white background */
+            border-radius: 10px; /* Rounds the corners */
+            padding: 20px; /* Adds padding inside the card */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Normal shadow */
+            //width: 300px; /* Set a fixed width for the card */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effect */
+            margin: 20px;
+        }
+        .card_market_place:hover {
+            transform: translateY(-10px); /* Moves the card upward slightly */
+            box-shadow: 0 0 15px 5px rgba(73, 203, 16, 0.8); /* Adds a green glow */
+        }
+        .btn_market_place {
+            text-decoration: none;
+            color: white; /* White text color */
+            background-color: #49CB10; /* Green button background */
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+        .btn_market_place:hover {
+            background-color: #3AA10C; /* Darker green for hover effect */
+        }
+        .text-center {
+            text-align: center; /* Centers content within the container */
+        }
+        .card-header-market-place {
+            background-color: #49CB10; /* Green header background */
+            color: white; /* White text */
+            text-align: center; /* Centers the text */
+            padding: 10px;
+            border-radius: 8px 8px 0 0; /* Rounds the top corners */
+        }
+
+//edit border
+
+.edit_order  .table-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            border: 2px solid #49CB10;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .edit_order  table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .edit_order  th{
+            padding: 15px;
+            text-align: left;
+        }
+        .edit_order  th {
+            background-color: #49CB10;
+            color: white;
+            font-size: 16px;
+        }
+        .edit_order  tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .edit_order  tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        .edit_order  tr:hover {
+            background-color: #d4fdd8;
+        }
+        .edit_order  td {
+            border-bottom: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        .edit_order  .status {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .edit_order  .status.delivered {
+            color: #49CB10;
+        }
+        .edit_order  .status.pending {
+            color: #FFA500;
+        }
+        .edit_order  .status.failed {
+            color: red;
+        }

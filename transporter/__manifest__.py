@@ -49,7 +49,8 @@ Long description of module's purpose
         'views/portal_layout.xml',
         'views/transcation_history_view.xml',
         'views/website_template.xml',
-        'views/menu.xml'
+        'views/menu.xml',
+        'views/templates.xml'
 
     ],
     'assets': {

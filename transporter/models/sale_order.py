@@ -7,6 +7,8 @@ class SaleOrder(models.Model):
 
     location_id = fields.Char(string="Pickup Location",required=True)
     location_dest_id = fields.Char(string="Destination Location",required=True)
+    location_city = fields.Char(string="City",compute="_compute_location_city")
+    location_dest_city = fields.Char(string="Destination Location",compute="_compute_location_city")
     subcategory_id = fields.Many2one("transport.subcategory",string="Vehicle Subcategory",required=1)
     category_id = fields.Many2one("transport.category",string="Vehicle Category",related="subcategory_id.category_id")
     vehicle_id = fields.Many2one("transport.vehicle")
@@ -23,6 +25,28 @@ class SaleOrder(models.Model):
     delivery_status = fields.Selection([('todo','To Do'),('in_progress','In progress'),('done','Done'),('cancel','Cancel')])
     razorpay_order_id = fields.Char()
     razorpay_payment_id = fields.Char()
+
+    def _compute_location_city(self):
+        for rec in self:
+            location_lst = rec.location_id.split(',')
+            if len(location_lst) >= 3:
+                rec.location_city = location_lst[-3].strip() + ', '+ location_lst[-2].strip()
+            elif  len(location_lst) >= 2:
+                rec.location_city = location_lst[-2].strip()
+            elif len(location_lst) >= 1:
+                rec.location_city = location_lst[0].strip()
+            else:
+                rec.location_city = False
+
+            location_dest_lst = rec.location_dest_id.split(',')
+            if len(location_dest_lst) >= 3:
+                rec.location_dest_city = location_dest_lst[-3].strip() + ', '+ location_lst[-2].strip()
+            elif len(location_dest_lst) >= 2:
+                rec.location_dest_city = location_dest_lst[-2].strip()
+            elif len(location_dest_lst) >= 1:
+                rec.location_dest_city = location_dest_lst[0].strip()
+            else:
+                rec.location_dest_city = False
 
     def action_confirm(self):
         res = super(SaleOrder, self).action_confirm()

@@ -62,6 +62,7 @@ WebsiteRoot.include({
                         );
 
                         this.autocomplate_location_id.addListener('place_changed', () => {
+                           debugger;
                            var location_place = this.autocomplate_location_id.getPlace();
                            const location_place_coordinates = {
                                     lat : location_place.geometry.location.lat(),

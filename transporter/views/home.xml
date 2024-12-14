@@ -2,163 +2,99 @@
     <template id="transporter.homepage">
         <t name="Homepage" t-name="Homepage">
             <t t-call="website.layout">
-                <div id="wrap" class="oe_structure">
-                    <!--section class="s_cover parallax s_parallax_is_fixed bg-black-50 pt96 pb96"
-                             data-scroll-background-ratio="1" data-snippet="s_cover">
+                <div id="wrap" class="oe_structure o_home_page">
+
+                    <section class="s_cover parallax s_parallax_is_fixed bg-black-50 pt96 pb96 o_colored_level mb32"
+                             data-scroll-background-ratio="1" data-snippet="s_cover" data-name="Cover"
+                             style="background-image: none;border-radius: 10px;">
                         <span class="s_parallax_bg oe_img_bg"
-                              style="background-image: url('/web/image/website.s_cover_default_image'); background-position: 50% 0;"/>
-                        <div class="o_we_bg_filter bg-black-50"/>
-                        <div class="container s_allow_columns">
-                            <h1 class="display-3" style="text-align: center; font-weight: bold;">Seamless Travel
-                                Experience
-                            </h1>
-                            <p class="lead" style="text-align: center;">Write one or two paragraphs describing your
-                                product,
-                                services or a specific feature. To be successful your content needs to be useful to your
-                                readers.
-                            </p>
-                            <p style="text-align: center;">
-                                <a class="btn btn-primary" href="/contactus">Contact Us</a>
-                            </p>
-                        </div>
-                    </section-->
-                    <section class="s_cover parallax s_parallax_is_fixed bg-black-50 pt96 pb96 o_colored_level mb32" data-scroll-background-ratio="1" data-snippet="s_cover" data-name="Cover" style="background-image: none;border-radius: 10px;">
-                        <span class="s_parallax_bg oe_img_bg" style="background-image: url('/transporter/static/src/img/book_truck.jpg'); background-position: 50% 0;"/>
+                              style="background-image: url('/transporter/static/src/img/book_truck.jpg'); background-position: 50% 0;"/>
                         <div class="o_we_bg_filter bg-black-50"/>
                         <div class="container s_allow_columns">
                             <!--h1 class="display-3 o_default_snippet_text" style="text-align: center; font-weight: bold;">Catchy Headline</h1-->
                             <div class="row align-items-center">
-                                <div class="col-lg-4  text-end pt16 pb16">
-                                    <h1>Track</h1>
-                                </div>
-                                <div class="col-lg-4  text-center pt16 pb16">
-                                    <h1>Deliver</h1>
-                                </div>
-                                <div class="col-lg-4  text-start pt16 pb16">
-                                    <h1>Transform</h1>
+                                <div class="col-lg-12 text-center pt16 pb16">
+                                    <h1>Track. Deliver. Transform.</h1>
                                 </div>
                             </div>
-                            <p class="lead o_default_snippet_text" style="text-align: center;">Revolutionizing logistics and supply chain management in
-the world.</p>
+                            <p class="lead o_default_snippet_text" style="text-align: center;">Revolutionizing logistics
+                                and supply chain management in
+                                the world.
+                            </p>
                             <p style="text-align: center;">
-                                <a class="btn btn-primary o_default_snippet_text" href="/create_order_view/1">Book now</a>
+                                <a class="btn btn-primary o_default_snippet_text" href="/create_order_view/1">Book now
+                                </a>
                             </p>
                         </div>
                     </section>
-<!--                    <section class="s_product_list o_colored_level mb32" data-snippet="s_product_list" data-name="Items" style="border-radius:10px">-->
 
-<!--                        <div class="container-fluid">-->
-<!--                            <div class="row">-->
-<!--                                <t t-foreach="transport_category_ids" t-as="transport_category_id"-->
-<!--                                   t-key="transport_category_id.id">-->
-<!--                                    <div class="col-lg-2">-->
-<!--                                        <a t-attf-href="/create_order_view/{{ transport_category_id.id }}">-->
-<!--                                            <img t-att-src="image_data_uri(transport_category_id.website_image)" alt=""-->
-<!--                                                 class="img img-fluid" loading="lazy"/>-->
-<!--                                        </a>-->
-<!--                                        <div class="s_product_list_item_link">-->
-<!--                                            <a class="btn btn-secondary o_default_snippet_text" t-attf-href="/create_order_view/{{ transport_category_id.id }}"-->
-<!--                                               data-bs-original-title="" title="" aria-describedby="popover913338">-->
-<!--                                                <span t-field="transport_category_id.name"/>-->
-<!--                                            </a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </t>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-
-<!--                    </section>-->
-                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px">
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6 pt16 pb16">
-                                    <h2>Your Trusted Transportation Partner</h2>
-                                    <p>Write one or two paragraphs describing your product or services. To be successful
-                                        your content needs to be useful to your readers.
-                                    </p>
-                                    <p>Start with the customer – find out what they want and give it to them.</p>
-                                    <p>
-                                        <a href="#" class="btn btn-secondary">Learn More</a>
-                                    </p>
-                                </div>
-                                <div class="col-lg-6 pt16 pb16">
-                                    <img src="/web/image/website.s_text_image_default_image"
-                                         class="img img-fluid mx-auto"
-                                         alt="" loading="lazy"/>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                     <section class="pt32 pb32 mb32" style="border-radius:10px">
                         <div class="container">
                             <div class="row align-items-center">
-                                <div class="col-lg-4  text-center pt16 pb16">
-                                    <h2>Track</h2>
-                                </div>
-                                <div class="col-lg-4  text-center pt16 pb16">
-                                    <h2>Deliver</h2>
-                                </div>
-                                <div class="col-lg-4  text-center pt16 pb16">
-                                    <h2>Transform</h2>
-                                </div>
-                                <div class="col-lg-12  text-center pt16 pb16">
-                                    <h4>Revolutionizing logistics and supply chain management in
-the world.</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="pt32 pb32 mb32" style="border-radius:10px">
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12  text-center pt16 pb16">
-                                    <h4>We empower suppliers and transporters for business that
-ensure Trackability Transparency Efficiency</h4>
+                                <div class="col-lg-12  text-center pt16 pb8">
+                                    <h3 style="color:#000000;font-size:30px;line-height:30px;font-weight:300;">We empower suppliers and transporters for business that
+                                        ensure
+                                    </h3>
                                 </div>
                                 <div class="col-lg-4  text-end pt16 pb16">
-                                    <h2>Trackability</h2>
+                                    <h2 style="font-weight: bolder;">Trackability</h2>
                                 </div>
                                 <div class="col-lg-4  text-center pt16 pb16">
-                                    <h2>Transparency</h2>
+                                    <h2 style="font-weight: bolder;">Transparency</h2>
                                 </div>
                                 <div class="col-lg-4  text-start pt16 pb16">
-                                    <h2>Efficiency</h2>
+                                    <h2 style="font-weight: bolder;">Efficiency</h2>
                                 </div>
+                                <p style="text-align: center;">
+                                <a class="btn btn-primary o_default_snippet_text o_learn_more_button">Learn more
+                                </a>
+                            </p>
                             </div>
                         </div>
                     </section>
-                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px">
+                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px" id="whoweare_div">
                         <div class="container">
                             <div class="row align-items-center">
                                 <div class="col-lg-6 pt16 pb16">
-                                    <h2>Who We Are?</h2>
+                                    <h2 style="font-weight:800;color:#000000;font-size:50px;line-height:60px">Who We Are?</h2>
+                                    <p class="p8" style="color:#000000;font-size:20px;line-height:30px;font-weight:300;width:80%;margin-top:20px">
+                                        At Kaizen, we’re revolutionizing logistics by connecting truck drivers, company
+                                        owners, and vendors through a seamless marketplace. Our platform simplifies
+                                        freight management, offering real-time GPS tracking for complete transparency
+                                        and peace of mind. With our built-in chat feature, we empower smooth
+                                        communication, ensuring every load is delivered efficiently and securely.
+
+                                        Driven by innovation and a commitment to excellence, Kaizen is your trusted
+                                        partner for smarter, faster, and hassle-free logistics.
+                                    </p>
                                 </div>
                                 <div class="col-lg-6 pt16 pb16">
-                                    <img src="/web/image/website.s_text_image_default_image"
+                                    <img src="/transporter/static/src/img/whoweare.png"
                                          class="img img-fluid mx-auto"
+                                         style="height:500px;"
                                          alt="" loading="lazy"/>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px">
+                    <section class="s_text_image pt32 pb32 mb32" data-snippet="s_text_image" style="border-radius:10px" id="whyweoffer_div">
                         <div class="container">
                             <div class="row align-items-center">
                                 <div class="col-lg-6 pt16 pb16">
-                                    <img src="/web/image/website.s_text_image_default_image"
+                                    <img src="/transporter/static/src/img/whatweoffer.jpeg"
                                          class="img img-fluid mx-auto"
-                                         alt="" loading="lazy"/>
+                                         alt="" loading="lazy" style="height:500px;width:500px;margin-left:0px !important"/>
                                 </div>
                                 <div class="col-lg-6 pt16 pb16">
-                                    <h2>What We Offer?</h2>
-                                    <ul>
+                                    <h2 style="font-weight:800;color:#000000;font-size:50px;line-height:60px">What We Offer?</h2>
+                                    <ul style="color:#000000;font-size:20px;line-height:30px;font-weight:300;width:80%;margin-top:20px">
                                         <li>Real time gps tracking</li>
                                         <li>Marketplace for transporters</li>
                                         <li>Chat Feature</li>
                                         <li>Multi language support for suppliers and transporters</li>
                                         <li>Easy to use dashboards tailored for seamless
-interactions</li>
+                                            interactions
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -168,50 +104,32 @@ interactions</li>
                         <div class="container">
                             <div class="row align-items-center">
                                 <div class="col-lg-6 pt16 pb16">
-                                    <h2>Why Choose Us?</h2>
-                                    <ul>
+                                    <h2 style="font-weight:800;color:#000000;font-size:50px;line-height:60px">Why Choose Us?</h2>
+                                    <ul style="color:#000000;font-size:20px;line-height:30px;font-weight:300;width:80%;margin-top:20px">
                                         <li>
-                                            Real-Time Tracking:<br/>
+                                            Real-Time Tracking:
+                                            <br/>
                                             Stay updated with GPS-powered live tracking for
                                             seamless delivery management.
                                         </li>
                                         <li>
-                                            Designed for Everyone:<br/>
+                                            Designed for Everyone:
+                                            <br/>
                                             A user-friendly, multilingual app that simplifies logistics
                                             for all.
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-6 pt16 pb16">
-                                    <img src="/web/image/website.s_text_image_default_image"
+                                    <img src="/transporter/static/src/img/whychooseus.jpeg"
+                                         style="height:500px;width:500px"
                                          class="img img-fluid mx-auto"
                                          alt="" loading="lazy"/>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <section class="s_numbers o_cc o_cc2 pt24 pb24" data-snippet="s_numbers" style="border-radius:10px">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-3 text-center pt24 pb24">
-                                    <span class="s_number display-4">12</span>
-                                    <h6>Transportation Solutions</h6>
-                                </div>
-                                <div class="col-lg-3 text-center pt24 pb24">
-                                    <span class="s_number display-4">45</span>
-                                    <h6>Efficient Transportation Solutions</h6>
-                                </div>
-                                <div class="col-lg-3 text-center pt24 pb24">
-                                    <span class="s_number display-4">8</span>
-                                    <h6>Industry-Leading Services</h6>
-                                </div>
-                                <div class="col-lg-3 text-center pt24 pb24">
-                                    <span class="s_number display-4">37</span>
-                                    <h6>Dynamic Transit Imagery</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+
                 </div>
             </t>
         </t>

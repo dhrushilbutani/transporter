@@ -238,6 +238,17 @@ publicWidget.registry.EditOrder = publicWidget.Widget.extend({
     },
 });
 
+publicWidget.registry.HomePage = publicWidget.Widget.extend({
+    selector: '.o_home_page',
+    events: {
+        'click .o_learn_more_button': '_onClickLearnMore',
+
+    },
+    _onClickLearnMore: function(){
+            document.getElementById('connect').scrollIntoView();
+    },
+});
+
 
 export default publicWidget.registry.Transporter;
 export default publicWidget.registry.WebsiteDirection;

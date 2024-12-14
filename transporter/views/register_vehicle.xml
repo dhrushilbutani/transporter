@@ -7,7 +7,7 @@
                         <div id="o_wblog_blog_top">
                             <div data-name="Cover" data-use_filters="True" data-use_text_align="True"
                                  data-res-model="blog.blog" data-res-id="3"
-                                 class="o_record_cover_container d-flex flex-column h-100 o_colored_level o_cc o_cc3   o_wblog_post_page_cover o_record_has_cover cover_auto">
+                                 class=" d-flex flex-column h-100 o_colored_level o_cc o_cc3   o_wblog_post_page_cover o_record_has_cover cover_auto" style="border-radius: 20px 20px 0px 0px;">
                                 <div class="o_record_cover_component o_record_cover_image "
                                      style="background-image: none;"></div>
                                 <div class="o_record_cover_component o_record_cover_filter oe_black"
