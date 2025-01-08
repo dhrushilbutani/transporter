@@ -244,13 +244,129 @@ publicWidget.registry.HomePage = publicWidget.Widget.extend({
         'click .o_learn_more_button': '_onClickLearnMore',
 
     },
+
     _onClickLearnMore: function(){
             document.getElementById('connect').scrollIntoView();
     },
 });
 
 
+
+publicWidget.registry.RegisterVehicle = publicWidget.Widget.extend({
+    selector: '.o_register_vehicle',
+    events: {
+        'click .send_otp_button': '_onSendOTP',
+        'click .verify_otp_button': '_onVerifyOTP',
+        'click .o_submit_form_button' : '_onSubmitForm',
+
+    },
+    init() {
+        this._super(...arguments);
+        this.orm = this.bindService("orm");
+        this.notification = this.bindService("notification");
+    },
+     _onSendOTP:async function(){
+            // send OTP code here
+            const aadhar_no = $("input.aadhar_input").val();
+            $("#aadhar_error").text("");
+            if(aadhar_no.length != 12){
+                $("#aadhar_error").text("Invalid Aadhar Number");
+
+            }
+            else{
+                var self = this;
+                console.log(self);
+                var button = document.getElementById("send_otp_button");
+                var buttonText = document.getElementById("button-text");
+
+
+                button.disabled = true;
+                button.innerHTML = "Send OTP";
+                var spinner = document.createElement('i');
+                spinner.className = 'fa fa-spinner fa-spin spinner';
+                button.insertBefore(spinner, button.firstChild);
+
+
+                await self.orm.call("aadhar.auth", "send_otp", [false,aadhar_no]).then(function(result){
+                    if(result == undefined){
+                         $("#aadhar_error").text("Please try after some time");
+                    }
+                    else if(result['error'] != undefined){
+                        $("#aadhar_error").text(result['error']);
+                    }
+                    else if(result["data"] == undefined){
+                        $("#aadhar_error").text(result["message"]);
+                    }
+                    else if(result["data"]["reference_id"] == undefined){
+                         $("#aadhar_error").text(result["data"]["message"]);
+                    }
+                    else{
+                        $("input#reference_id").val(result["data"]["reference_id"])
+                        $("input.aadhar_input").attr("readonly",true);
+                        $("#send_otp_btn").css({"display":"none"});
+                        $("#otp_input").css({"display":"block"});
+                        $("#verify_otp_btn").css({"display":"block"});
+                    }
+                    button.disabled = false;
+                    button.innerHTML = "Click Me"; // Restore text
+                    spinner.remove();
+
+
+                    });
+
+                }
+
+
+            },
+     _onVerifyOTP: async function(){
+                var self = this;
+                const otp = $("input.otp_inp_field").val();
+                const ref_id = $("input.reference_id").val();
+
+                var button = document.getElementById("verify_otp_button");
+                button.disabled = true;
+                button.innerHTML = "Verify";
+                var spinner = document.createElement('i');
+                spinner.className = 'fa fa-spinner fa-spin spinner';
+                button.insertBefore(spinner, button.firstChild);
+                console.log("otp--",otp,ref_id);
+                  await self.orm.call("aadhar.auth", "validate_otp", [false,ref_id,otp]).then(function(result){
+                    if(result['error'] != undefined){
+                        $("#otp_error").text(result['error']);
+
+                    }
+                    else if(result["data"] == undefined){
+                        $("#aadhar_error").text(result["message"]);
+                    }
+                    else if(result["data"]["status"]!= "VALID"){
+                        $("#otp_error").text(result["data"]["message"]);
+                    }
+                    else{
+                         $("input.aadhar_input").attr("readonly",true);
+                        $("#send_otp_btn").css({"display":"none"});
+                        $("#otp_input").css({"display":"none"});
+                        $("#verify_otp_btn").css({"display":"none"});
+                        $("#verified_block").css({"display":"block"});
+                    }
+                    button.disabled = false;
+                    button.innerHTML = "Verify"; // Restore text
+                    spinner.remove();
+
+
+                    });
+
+
+        },
+    _onSubmitForm: function(event){
+
+        event.preventDefault();
+        alert("Form has been submitted!");
+        document.getElementById("o_register_vehicle_form").submit();
+    },
+});
+
 export default publicWidget.registry.Transporter;
 export default publicWidget.registry.WebsiteDirection;
 export default publicWidget.registry.ShareLiveLocation;
 export default publicWidget.registry.LanguageSelector;
+export default publicWidget.registry.RegisterVehicle;

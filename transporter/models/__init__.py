@@ -9,3 +9,4 @@ from . import res_partner
 from . import res_partner_bank
 from . import create_payment_popup
 from . import transcation_history
+from . import aadhar_auth

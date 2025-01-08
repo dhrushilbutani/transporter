@@ -112,3 +112,88 @@ section {
         .edit_order  .status.failed {
             color: red;
         }
+
+
+
+
+
+.card-otp {
+	width: 400px;
+	border: none;
+	height: 300px;
+	box-shadow: 0px 5px 20px 0px #d2dae3;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+.card-otp h6 {
+	color: red;
+	font-size: 20px
+}
+
+.inputs-opt input {
+	width: 40px;
+	height: 40px
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0
+}
+
+.card-2-otp {
+	background-color: #fff;
+	padding: 10px;
+	width: 350px;
+	height: 100px;
+	bottom: -50px;
+	left: 20px;
+	position: absolute;
+	border-radius: 5px
+}
+
+.card-2-otp .content {
+	margin-top: 50px
+}
+
+.card-2-otp .content a {
+	color: red
+}
+
+.form-control-otp:focus {
+	box-shadow: none;
+	border: 2px solid red
+}
+
+.validate-otp {
+	border-radius: 20px;
+	height: 40px;
+	background-color: red;
+	border: 1px solid red;
+	width: 140px
+}
+
+.btn-loading {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #49CB10;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+.btn-loading:disabled {
+    background-color: #42b80f;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.spinner {
+    margin-right: 8px;
+}

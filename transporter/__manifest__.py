@@ -50,8 +50,8 @@ Long description of module's purpose
         'views/transcation_history_view.xml',
         'views/website_template.xml',
         'views/menu.xml',
-        'views/templates.xml'
-
+        'views/templates.xml',
+        'views/cron_aadhar.xml'
     ],
     'assets': {
         'web.assets_frontend': [

@@ -13,3 +13,5 @@ access_transaction_history,transaction_history,model_transaction_history,,1,1,1,
 access_create_multi_payment,create_multi_payment,model_create_multi_payment,,1,1,1,1
 
 access_create_multi_payment_line,create_multi_payment_line,model_create_multi_payment_line,,1,1,1,1
+
+access_aadhar_auth,aadhar_auth,model_aadhar_auth,,1,1,1,1
